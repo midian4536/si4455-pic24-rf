@@ -49,12 +49,12 @@
 
   Each transmitted packet consists of the following parts:
 
-|Field|Size|Description|
-|-------------|-------|----------------------------------|
-|**Preamble**|8 bytes|Helps the receiver detect signal presence,1010 pattern|
-|**Sync Word**|2 bytes|Synchronization marker for correct packet alignment|
-|**Payload**|16 bytes|Actual data content being transmitted|
-|**CRC**|2 bytes|CRC-16-IBM, initialized with all 1's, high byte first|
+| Field         | Size     | Description                                            |
+| ------------- | -------- | ------------------------------------------------------ |
+| **Preamble**  | 8 bytes  | Helps the receiver detect signal presence,1010 pattern |
+| **Sync Word** | 2 bytes  | Synchronization marker for correct packet alignment    |
+| **Payload**   | 16 bytes | Actual data content being transmitted                  |
+| **CRC**       | 2 bytes  | CRC-16-IBM, initialized with all 1's, high byte first  |
 
 ## Q&A
 
