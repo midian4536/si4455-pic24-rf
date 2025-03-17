@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/code/mplab/20250315wrfc_test/radio_recv.X/main.c</file>
-            <file>file:/D:/code/mplab/20250315wrfc_test/radio_recv.X/radio.c</file>
+            <file>file:/D:/code/mplab/20250317wrfc_test/radio_recv.X/radio.h</file>
+            <file>file:/D:/code/mplab/20250317wrfc_test/radio_recv.X/main.c</file>
+            <file>file:/D:/code/mplab/20250317wrfc_test/radio_recv.X/radio_config.h</file>
+            <file>file:/D:/code/mplab/20250317wrfc_test/radio_recv.X/radio.c</file>
         </group>
     </open-files>
 </project-private>

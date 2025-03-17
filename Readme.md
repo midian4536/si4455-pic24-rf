@@ -50,12 +50,13 @@ This demo establishes a radio communication link between a **transmit board** an
 
 Each transmitted packet consists of the following parts:
 
-| Field         | Size     | Description                                                   |
-| ------------- | -------- | ------------------------------------------------------------- |
-| **Preamble**  | 8 bytes  | Helps the receiver detect signal presence (101010... pattern) |
-| **Sync Word** | 2 bytes  | Synchronization marker for correct packet alignment           |
-| **Payload**   | 16 bytes | Actual data content being transmitted                         |
-| **CRC**       | 2 bytes  | CRC-16-IBM (initial value: 0xFFFF, high byte first)           |
+| Field         | Size       | Description                                                   |
+| ------------- | ---------- | ------------------------------------------------------------- |
+| **Preamble**  | 8 bytes    | Helps the receiver detect signal presence (101010... pattern) |
+| **Sync Word** | 2 bytes    | Synchronization marker for correct packet alignment           |
+| **Length**    | 1 byte     | Number of bytes in the payload                                |
+| **Payload**   | 0-63 bytes | Actual data being transmitted (max 63 bytes)                  |
+| **CRC**       | 2 bytes    | CRC-16-IBM (initial value: 0xFFFF, high byte first)           |
 
 ## Q&A
 
@@ -81,6 +82,9 @@ Modify the **include path** and the **definition of `RADIO_CONFIGURATION_DATA`**
 ## Update History
 
 - **2025-03-17**
+  - Fixed structure of variable-length packets.
+
+- **2025-03-15**
   - Optimized code structure.
   - Improved Si4455 driver.
 
@@ -108,7 +112,6 @@ Modify the **include path** and the **definition of `RADIO_CONFIGURATION_DATA`**
 
   - ~~Implement **half-duplex communication**.~~ After testing, we confirmed that **Si4455 Rev C2A** (used in this project) does not support half-duplex communication. However, **Si4455 Rev B1A** may have this capability.
   - Investigate **UART communication errors** after initialization. The issue might be caused by **fast transmission rates**—adding a small delay between transmissions could improve stability.
-  - Variable length packet transmission is not stable, awaiting subsequent refinement.
 
 ## Author Information
 

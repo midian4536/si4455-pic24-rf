@@ -80,22 +80,22 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x1f6           0x2f1  (753)
 .const                       0x3f6               0x4b2           0x70b  (1803)
-.text                        0x8a8               0xd24          0x13b6  (5046)
-.dinit                      0x15cc                0x28            0x3c  (60)
-.text                       0x15f4                 0xa             0xf  (15)
+.text                        0x8a8               0xd22          0x13b3  (5043)
+.dinit                      0x15ca                0x28            0x3c  (60)
+.text                       0x15f2                 0xa             0xf  (15)
 
-                 Total "program" memory used (bytes):         0x1dfd  (7677) 47%
+                 Total "program" memory used (bytes):         0x1dfa  (7674) 47%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0            0xa8  (168)
-.ndata                       0x8a8                   0             0x2  (2)
-.nbss                        0x8aa                   0             0x2  (2)
+.nbss                        0x800                   0            0xa6  (166)
+.ndata                       0x8a6                   0             0x2  (2)
+.nbss                        0x8a8                   0             0x2  (2)
 
-                 Total "data" memory used (bytes):           0xac  (172) 11%
+                 Total "data" memory used (bytes):           0xaa  (170) 11%
 
 
 Dynamic Memory Usage
@@ -103,9 +103,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x8ac                               0x554  (1364)
+stack                        0x8aa                               0x556  (1366)
 
-                 Maximum dynamic memory (bytes):          0x554  (1364)
+                 Maximum dynamic memory (bytes):          0x556  (1366)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -117,26 +117,24 @@ External Symbols in Data Memory (by address):
                     0x0841                  _recv_char
                     0x0842                  _uart_flag
                     0x0844                  _custom_radio_packet
-                    0x0884                  _radio_packet_length
-                    0x0886                  _si4455_cmd
-                    0x0896                  _radio_cmd
-                    0x08a6                  _hex1
-                    0x08a7                  _hex2
-                    0x08a8                  _p_radio_configuration
-                    0x08aa                  _cts_went_high
+                    0x0884                  _si4455_cmd
+                    0x0894                  _radio_cmd
+                    0x08a4                  _hex1
+                    0x08a5                  _hex2
+                    0x08a6                  _p_radio_configuration
+                    0x08a8                  _cts_went_high
 
 External Symbols in Data Memory (by name):
 
                     0x0840                  _buf_index
-                    0x08aa                  _cts_went_high
+                    0x08a8                  _cts_went_high
                     0x0844                  _custom_radio_packet
-                    0x08a6                  _hex1
-                    0x08a7                  _hex2
-                    0x08a8                  _p_radio_configuration
-                    0x0896                  _radio_cmd
-                    0x0884                  _radio_packet_length
+                    0x08a4                  _hex1
+                    0x08a5                  _hex2
+                    0x08a6                  _p_radio_configuration
+                    0x0894                  _radio_cmd
                     0x0841                  _recv_char
-                    0x0886                  _si4455_cmd
+                    0x0884                  _si4455_cmd
                     0x0800                  _uart_buf
                     0x0842                  _uart_flag
 
@@ -193,37 +191,37 @@ External Symbols in Program Memory (by address):
                   0x001160                  _radio_check_received
                   0x00119e                  _radio_check_transmitted
                   0x0011c8                  _radio_check_received_variable_packet
-                  0x001222                  _radio_comm_get_resp
-                  0x001278                  _radio_comm_send_cmd
-                  0x001298                  _radio_comm_read_data
-                  0x0012c6                  _radio_comm_write_data
-                  0x0012f4                  _radio_comm_poll_cts
-                  0x001300                  _radio_comm_send_cmd_get_resp
-                  0x00131a                  _radio_comm_clear_cts
-                  0x001322                  _spi_init
-                  0x00135a                  _spi_transfer
-                  0x001378                  _spi_send_array
-                  0x0013a0                  _spi_recv_array
-                  0x0013ce                  _uart_init
-                  0x001414                  _uart_send_char
-                  0x001438                  _uart_send_array
-                  0x001474                  _main
-                  0x0014a0                  _uart_handler
-                  0x0014cc                  _radio_handler
-                  0x001500                  _radio_hal_assert_shut_down
-                  0x001508                  _radio_hal_deassert_shut_down
-                  0x001510                  _radio_hal_clear_nsel
-                  0x001518                  _radio_hal_set_nsel
-                  0x001520                  _radio_hal_nirq_level
-                  0x00152c                  _radio_hal_spi_write_byte
-                  0x001538                  _radio_hal_spi_read_byte
-                  0x001542                  _radio_hal_spi_write_data
-                  0x001552                  _radio_hal_spi_read_data
-                  0x001562                  _clock_init
-                  0x001570                  _delay_ms
-                  0x00159c                  _led_init
-                  0x0015a6                  _led_shine
-                  0x0015f4                  _adc_init
+                  0x00121e                  _radio_comm_get_resp
+                  0x001274                  _radio_comm_send_cmd
+                  0x001294                  _radio_comm_read_data
+                  0x0012c2                  _radio_comm_write_data
+                  0x0012f0                  _radio_comm_poll_cts
+                  0x0012fc                  _radio_comm_send_cmd_get_resp
+                  0x001316                  _radio_comm_clear_cts
+                  0x00131e                  _spi_init
+                  0x001356                  _spi_transfer
+                  0x001374                  _spi_send_array
+                  0x00139c                  _spi_recv_array
+                  0x0013ca                  _uart_init
+                  0x001410                  _uart_send_char
+                  0x001434                  _uart_send_array
+                  0x001470                  _main
+                  0x00149c                  _uart_handler
+                  0x0014c8                  _radio_handler
+                  0x0014fe                  _radio_hal_assert_shut_down
+                  0x001506                  _radio_hal_deassert_shut_down
+                  0x00150e                  _radio_hal_clear_nsel
+                  0x001516                  _radio_hal_set_nsel
+                  0x00151e                  _radio_hal_nirq_level
+                  0x00152a                  _radio_hal_spi_write_byte
+                  0x001536                  _radio_hal_spi_read_byte
+                  0x001540                  _radio_hal_spi_write_data
+                  0x001550                  _radio_hal_spi_read_data
+                  0x001560                  _clock_init
+                  0x00156e                  _delay_ms
+                  0x00159a                  _led_init
+                  0x0015a4                  _led_shine
+                  0x0015f2                  _adc_init
 
 External Symbols in Program Memory (by name):
 
@@ -236,36 +234,36 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0015f4                  _adc_init
+                  0x0015f2                  _adc_init
                   0x000ea4                  _char_to_hex
-                  0x001562                  _clock_init
-                  0x001570                  _delay_ms
-                  0x00159c                  _led_init
-                  0x0015a6                  _led_shine
-                  0x001474                  _main
+                  0x001560                  _clock_init
+                  0x00156e                  _delay_ms
+                  0x00159a                  _led_init
+                  0x0015a4                  _led_shine
+                  0x001470                  _main
                   0x000322                  _memset
                   0x001160                  _radio_check_received
                   0x0011c8                  _radio_check_received_variable_packet
                   0x00119e                  _radio_check_transmitted
-                  0x00131a                  _radio_comm_clear_cts
-                  0x001222                  _radio_comm_get_resp
-                  0x0012f4                  _radio_comm_poll_cts
-                  0x001298                  _radio_comm_read_data
-                  0x001278                  _radio_comm_send_cmd
-                  0x001300                  _radio_comm_send_cmd_get_resp
-                  0x0012c6                  _radio_comm_write_data
+                  0x001316                  _radio_comm_clear_cts
+                  0x00121e                  _radio_comm_get_resp
+                  0x0012f0                  _radio_comm_poll_cts
+                  0x001294                  _radio_comm_read_data
+                  0x001274                  _radio_comm_send_cmd
+                  0x0012fc                  _radio_comm_send_cmd_get_resp
+                  0x0012c2                  _radio_comm_write_data
                   0x00074a                  _radio_configuration
                   0x0003f6                  _radio_configuration_data_array
-                  0x001500                  _radio_hal_assert_shut_down
-                  0x001510                  _radio_hal_clear_nsel
-                  0x001508                  _radio_hal_deassert_shut_down
-                  0x001520                  _radio_hal_nirq_level
-                  0x001518                  _radio_hal_set_nsel
-                  0x001538                  _radio_hal_spi_read_byte
-                  0x001552                  _radio_hal_spi_read_data
-                  0x00152c                  _radio_hal_spi_write_byte
-                  0x001542                  _radio_hal_spi_write_data
-                  0x0014cc                  _radio_handler
+                  0x0014fe                  _radio_hal_assert_shut_down
+                  0x00150e                  _radio_hal_clear_nsel
+                  0x001506                  _radio_hal_deassert_shut_down
+                  0x00151e                  _radio_hal_nirq_level
+                  0x001516                  _radio_hal_set_nsel
+                  0x001536                  _radio_hal_spi_read_byte
+                  0x001550                  _radio_hal_spi_read_data
+                  0x00152a                  _radio_hal_spi_write_byte
+                  0x001540                  _radio_hal_spi_write_data
+                  0x0014c8                  _radio_handler
                   0x0010b2                  _radio_init
                   0x00109a                  _radio_power_up
                   0x0010e8                  _radio_start_rx
@@ -301,14 +299,14 @@ External Symbols in Program Memory (by name):
                   0x000a0a                  _si4455_start_tx
                   0x0009d2                  _si4455_write_ezconfig_array
                   0x000bc4                  _si4455_write_tx_fifo
-                  0x001322                  _spi_init
-                  0x0013a0                  _spi_recv_array
-                  0x001378                  _spi_send_array
-                  0x00135a                  _spi_transfer
-                  0x0014a0                  _uart_handler
-                  0x0013ce                  _uart_init
-                  0x001438                  _uart_send_array
-                  0x001414                  _uart_send_char
+                  0x00131e                  _spi_init
+                  0x00139c                  _spi_recv_array
+                  0x001374                  _spi_send_array
+                  0x001356                  _spi_transfer
+                  0x00149c                  _uart_handler
+                  0x0013ca                  _uart_init
+                  0x001434                  _uart_send_array
+                  0x001410                  _uart_send_char
 
 Memory Configuration
 
@@ -431,23 +429,23 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x5df9
+.debug_info       0x000000       0x5de0
  *(.debug_info)
  .debug_info      0x000000        0x1d4 build/default/production/debug.o
  .debug_info      0x0001d4        0x4c5 build/default/production/led.o
- .debug_info      0x000699       0x144f build/default/production/radio.o
- .debug_info      0x001ae8        0x3b2 build/default/production/radio_comm.o
- .debug_info      0x001e9a        0x6cd build/default/production/radio_hal.o
- .debug_info      0x002567       0x16b4 build/default/production/si4455_api_lib.o
- .debug_info      0x003c1b        0xbee build/default/production/spi.o
- .debug_info      0x004809        0xdc7 build/default/production/uart.o
- .debug_info      0x0055d0        0x349 build/default/production/main.o
- .debug_info      0x005919        0x2e4 build/default/production/clock.o
- .debug_info      0x005bfd        0x170 build/default/production/adc.o
- .debug_info      0x005d6d         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_info      0x000699       0x1440 build/default/production/radio.o
+ .debug_info      0x001ad9        0x3b2 build/default/production/radio_comm.o
+ .debug_info      0x001e8b        0x6cd build/default/production/radio_hal.o
+ .debug_info      0x002558       0x16b4 build/default/production/si4455_api_lib.o
+ .debug_info      0x003c0c        0xbee build/default/production/spi.o
+ .debug_info      0x0047fa        0xdc7 build/default/production/uart.o
+ .debug_info      0x0055c1        0x33f build/default/production/main.o
+ .debug_info      0x005900        0x2e4 build/default/production/clock.o
+ .debug_info      0x005be4        0x170 build/default/production/adc.o
+ .debug_info      0x005d54         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0xaa5
+.debug_abbrev     0x000000        0xa96
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0xa6 build/default/production/debug.o
  .debug_abbrev    0x0000a6         0xc6 build/default/production/led.o
@@ -457,25 +455,25 @@ __FDS
  .debug_abbrev    0x0004a7        0x186 build/default/production/si4455_api_lib.o
  .debug_abbrev    0x00062d        0x125 build/default/production/spi.o
  .debug_abbrev    0x000752        0x140 build/default/production/uart.o
- .debug_abbrev    0x000892         0xb4 build/default/production/main.o
- .debug_abbrev    0x000946         0xf2 build/default/production/clock.o
- .debug_abbrev    0x000a38         0x59 build/default/production/adc.o
- .debug_abbrev    0x000a91         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_abbrev    0x000892         0xa5 build/default/production/main.o
+ .debug_abbrev    0x000937         0xf2 build/default/production/clock.o
+ .debug_abbrev    0x000a29         0x59 build/default/production/adc.o
+ .debug_abbrev    0x000a82         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_line       0x000000        0xb55
+.debug_line       0x000000        0xb54
  *(.debug_line)
  .debug_line      0x000000         0xa4 build/default/production/debug.o
  .debug_line      0x0000a4        0x10c build/default/production/led.o
- .debug_line      0x0001b0        0x174 build/default/production/radio.o
- .debug_line      0x000324         0x88 build/default/production/radio_comm.o
- .debug_line      0x0003ac        0x121 build/default/production/radio_hal.o
- .debug_line      0x0004cd        0x171 build/default/production/si4455_api_lib.o
- .debug_line      0x00063e        0x127 build/default/production/spi.o
- .debug_line      0x000765        0x140 build/default/production/uart.o
- .debug_line      0x0008a5         0x68 build/default/production/main.o
- .debug_line      0x00090d        0x10b build/default/production/clock.o
- .debug_line      0x000a18        0x103 build/default/production/adc.o
- .debug_line      0x000b1b         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_line      0x0001b0        0x173 build/default/production/radio.o
+ .debug_line      0x000323         0x88 build/default/production/radio_comm.o
+ .debug_line      0x0003ab        0x121 build/default/production/radio_hal.o
+ .debug_line      0x0004cc        0x171 build/default/production/si4455_api_lib.o
+ .debug_line      0x00063d        0x127 build/default/production/spi.o
+ .debug_line      0x000764        0x140 build/default/production/uart.o
+ .debug_line      0x0008a4         0x68 build/default/production/main.o
+ .debug_line      0x00090c        0x10b build/default/production/clock.o
+ .debug_line      0x000a17        0x103 build/default/production/adc.o
+ .debug_line      0x000b1a         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
 .debug_frame      0x000000        0x82c
  *(.debug_frame)
@@ -491,18 +489,18 @@ __FDS
  .debug_frame     0x0007b6         0x48 build/default/production/clock.o
  .debug_frame     0x0007fe         0x2e build/default/production/adc.o
 
-.debug_str        0x000000        0x34c
+.debug_str        0x000000        0x324
  *(.debug_str)
  .debug_str       0x000000          0xa build/default/production/debug.o
  .debug_str       0x00000a         0x13 build/default/production/led.o
- .debug_str       0x00001d         0xf6 build/default/production/radio.o
- .debug_str       0x000113         0x28 build/default/production/radio_comm.o
- .debug_str       0x00013b         0x27 build/default/production/radio_hal.o
- .debug_str       0x000162         0xd1 build/default/production/si4455_api_lib.o
- .debug_str       0x000233         0x49 build/default/production/spi.o
- .debug_str       0x00027c         0x6a build/default/production/uart.o
- .debug_str       0x0002e6         0x5b build/default/production/main.o
- .debug_str       0x000341          0xb build/default/production/clock.o
+ .debug_str       0x00001d         0xe2 build/default/production/radio.o
+ .debug_str       0x0000ff         0x28 build/default/production/radio_comm.o
+ .debug_str       0x000127         0x27 build/default/production/radio_hal.o
+ .debug_str       0x00014e         0xd1 build/default/production/si4455_api_lib.o
+ .debug_str       0x00021f         0x49 build/default/production/spi.o
+ .debug_str       0x000268         0x6a build/default/production/uart.o
+ .debug_str       0x0002d2         0x47 build/default/production/main.o
+ .debug_str       0x000319          0xb build/default/production/clock.o
 
 .debug_loc
  *(.debug_loc)
@@ -511,30 +509,30 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x808
+                  0x000000        0x7f0
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x7a build/default/production/debug.o
  .debug_pubnames
                   0x00007a         0x2d build/default/production/led.o
  .debug_pubnames
-                  0x0000a7        0x160 build/default/production/radio.o
+                  0x0000a7        0x148 build/default/production/radio.o
  .debug_pubnames
-                  0x000207         0xd9 build/default/production/radio_comm.o
+                  0x0001ef         0xd9 build/default/production/radio_comm.o
  .debug_pubnames
-                  0x0002e0        0x10d build/default/production/radio_hal.o
+                  0x0002c8        0x10d build/default/production/radio_hal.o
  .debug_pubnames
-                  0x0003ed        0x2a9 build/default/production/si4455_api_lib.o
+                  0x0003d5        0x2a9 build/default/production/si4455_api_lib.o
  .debug_pubnames
-                  0x000696         0x56 build/default/production/spi.o
+                  0x00067e         0x56 build/default/production/spi.o
  .debug_pubnames
-                  0x0006ec         0x91 build/default/production/uart.o
+                  0x0006d4         0x91 build/default/production/uart.o
  .debug_pubnames
-                  0x00077d         0x3e build/default/production/main.o
+                  0x000765         0x3e build/default/production/main.o
  .debug_pubnames
-                  0x0007bb         0x2e build/default/production/clock.o
+                  0x0007a3         0x2e build/default/production/clock.o
  .debug_pubnames
-                  0x0007e9         0x1f build/default/production/adc.o
+                  0x0007d1         0x1f build/default/production/adc.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1030,29 +1028,28 @@ __c30_signature
  .debug_pubtypes
                   0x000a6d         0x1f build/default/production/adc.o
 
-.nbss               0x0800         0xa8
+.nbss               0x0800         0xa6
  .nbss              0x0800         0x44 build/default/production/uart.o
                     0x0800                  _uart_buf
                     0x0840                  _buf_index
                     0x0841                  _recv_char
                     0x0842                  _uart_flag
- .nbss              0x0844         0x42 build/default/production/radio.o
+ .nbss              0x0844         0x40 build/default/production/radio.o
                     0x0844                  _custom_radio_packet
-                    0x0884                  _radio_packet_length
- .nbss              0x0886         0x20 build/default/production/si4455_api_lib.o
-                    0x0886                  _si4455_cmd
-                    0x0896                  _radio_cmd
- .nbss              0x08a6          0x2 build/default/production/debug.o
-                    0x08a6                  _hex1
-                    0x08a7                  _hex2
+ .nbss              0x0884         0x20 build/default/production/si4455_api_lib.o
+                    0x0884                  _si4455_cmd
+                    0x0894                  _radio_cmd
+ .nbss              0x08a4          0x2 build/default/production/debug.o
+                    0x08a4                  _hex1
+                    0x08a5                  _hex2
 
-.ndata              0x08a8          0x2
- .ndata             0x08a8          0x2 build/default/production/radio.o
-                    0x08a8                  _p_radio_configuration
+.ndata              0x08a6          0x2
+ .ndata             0x08a6          0x2 build/default/production/radio.o
+                    0x08a6                  _p_radio_configuration
 
-.nbss               0x08aa          0x2
- .nbss              0x08aa          0x2 build/default/production/radio_comm.o
-                    0x08aa                  _cts_went_high
+.nbss               0x08a8          0x2
+ .nbss              0x08a8          0x2 build/default/production/radio_comm.o
+                    0x08a8                  _cts_went_high
 
 .ivt._U1RXInterrupt
                   0x00002a          0x2
@@ -1072,7 +1069,7 @@ __c30_signature
  .const             0x8794         0xe8 build/default/production/debug.o
  .const             0x887c         0x2c build/default/production/main.o
 
-.text             0x0008a8        0xd24
+.text             0x0008a8        0xd22
  .text            0x0008a8        0x5fc build/default/production/si4455_api_lib.o
                   0x0008a8                  _si4455_reset
                   0x0008d0                  _si4455_power_up
@@ -1106,7 +1103,7 @@ __c30_signature
                   0x000ee4                  _show_si4455_properties
                   0x001010                  _show_si4455_fifo
                   0x001056                  _show_si4455_state
- .text            0x00109a        0x188 build/default/production/radio.o
+ .text            0x00109a        0x184 build/default/production/radio.o
                   0x00109a                  _radio_power_up
                   0x0010b2                  _radio_init
                   0x0010e8                  _radio_start_rx
@@ -1115,47 +1112,47 @@ __c30_signature
                   0x001160                  _radio_check_received
                   0x00119e                  _radio_check_transmitted
                   0x0011c8                  _radio_check_received_variable_packet
- .text            0x001222        0x100 build/default/production/radio_comm.o
-                  0x001222                  _radio_comm_get_resp
-                  0x001278                  _radio_comm_send_cmd
-                  0x001298                  _radio_comm_read_data
-                  0x0012c6                  _radio_comm_write_data
-                  0x0012f4                  _radio_comm_poll_cts
-                  0x001300                  _radio_comm_send_cmd_get_resp
-                  0x00131a                  _radio_comm_clear_cts
- .text            0x001322         0xac build/default/production/spi.o
-                  0x001322                  _spi_init
-                  0x00135a                  _spi_transfer
-                  0x001378                  _spi_send_array
-                  0x0013a0                  _spi_recv_array
- .text            0x0013ce         0xa6 build/default/production/uart.o
-                  0x0013ce                  _uart_init
-                  0x001414                  _uart_send_char
-                  0x001438                  _uart_send_array
- .text            0x001474         0x8c build/default/production/main.o
-                  0x001474                  _main
-                  0x0014a0                  _uart_handler
-                  0x0014cc                  _radio_handler
- .text            0x001500         0x62 build/default/production/radio_hal.o
-                  0x001500                  _radio_hal_assert_shut_down
-                  0x001508                  _radio_hal_deassert_shut_down
-                  0x001510                  _radio_hal_clear_nsel
-                  0x001518                  _radio_hal_set_nsel
-                  0x001520                  _radio_hal_nirq_level
-                  0x00152c                  _radio_hal_spi_write_byte
-                  0x001538                  _radio_hal_spi_read_byte
-                  0x001542                  _radio_hal_spi_write_data
-                  0x001552                  _radio_hal_spi_read_data
- .text            0x001562         0x3a build/default/production/clock.o
-                  0x001562                  _clock_init
-                  0x001570                  _delay_ms
- .text            0x00159c         0x30 build/default/production/led.o
-                  0x00159c                  _led_init
-                  0x0015a6                  _led_shine
+ .text            0x00121e        0x100 build/default/production/radio_comm.o
+                  0x00121e                  _radio_comm_get_resp
+                  0x001274                  _radio_comm_send_cmd
+                  0x001294                  _radio_comm_read_data
+                  0x0012c2                  _radio_comm_write_data
+                  0x0012f0                  _radio_comm_poll_cts
+                  0x0012fc                  _radio_comm_send_cmd_get_resp
+                  0x001316                  _radio_comm_clear_cts
+ .text            0x00131e         0xac build/default/production/spi.o
+                  0x00131e                  _spi_init
+                  0x001356                  _spi_transfer
+                  0x001374                  _spi_send_array
+                  0x00139c                  _spi_recv_array
+ .text            0x0013ca         0xa6 build/default/production/uart.o
+                  0x0013ca                  _uart_init
+                  0x001410                  _uart_send_char
+                  0x001434                  _uart_send_array
+ .text            0x001470         0x8e build/default/production/main.o
+                  0x001470                  _main
+                  0x00149c                  _uart_handler
+                  0x0014c8                  _radio_handler
+ .text            0x0014fe         0x62 build/default/production/radio_hal.o
+                  0x0014fe                  _radio_hal_assert_shut_down
+                  0x001506                  _radio_hal_deassert_shut_down
+                  0x00150e                  _radio_hal_clear_nsel
+                  0x001516                  _radio_hal_set_nsel
+                  0x00151e                  _radio_hal_nirq_level
+                  0x00152a                  _radio_hal_spi_write_byte
+                  0x001536                  _radio_hal_spi_read_byte
+                  0x001540                  _radio_hal_spi_write_data
+                  0x001550                  _radio_hal_spi_read_data
+ .text            0x001560         0x3a build/default/production/clock.o
+                  0x001560                  _clock_init
+                  0x00156e                  _delay_ms
+ .text            0x00159a         0x30 build/default/production/led.o
+                  0x00159a                  _led_init
+                  0x0015a4                  _led_shine
 
-.dinit            0x0015cc         0x28
- .dinit           0x0015cc         0x28 data_init
+.dinit            0x0015ca         0x28
+ .dinit           0x0015ca         0x28 data_init
 
-.text             0x0015f4          0xa
- .text            0x0015f4          0xa build/default/production/adc.o
-                  0x0015f4                  _adc_init
+.text             0x0015f2          0xa
+ .text            0x0015f2          0xa build/default/production/adc.o
+                  0x0015f2                  _adc_init

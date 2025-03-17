@@ -17,7 +17,6 @@ typedef struct {
 extern const unsigned char radio_configuration_data_array[];
 extern const radio_configuration_t *p_radio_configuration;
 extern unsigned char custom_radio_packet[RADIO_MAX_PACKET_LENGTH];
-extern unsigned char radio_packet_length;
 
 void radio_power_up(void);
 void radio_init(void);

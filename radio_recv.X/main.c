@@ -22,7 +22,7 @@ void radio_handler();
 int main(void) {
     clock_init();
     adc_init();
-    
+
     led_init();
     spi_init();
     uart_init();
@@ -54,10 +54,10 @@ void radio_handler() {
     if (1 == radio_check_received_variable_packet()) {
         switch (p_radio_configuration->radio_variable_packet_state) {
             case 0:
-                uart_send_array(custom_radio_packet, radio_packet_length);
+                uart_send_array(custom_radio_packet, p_radio_configuration->radio_packet_length);
                 break;
             case 1:
-                uart_send_array(custom_radio_packet, radio_packet_length);
+                uart_send_array(custom_radio_packet + 1, custom_radio_packet[0]);
                 break;
             default:
                 break;

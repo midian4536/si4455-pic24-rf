@@ -22,7 +22,7 @@ void radio_handler();
 int main(void) {
     clock_init();
     adc_init();
-    
+
     led_init();
     spi_init();
     uart_init();
@@ -32,8 +32,8 @@ int main(void) {
     uart_send_array((unsigned char *) "4455 initialized", 16);
     led_shine(3, 300);
 
-    memcpy(custom_radio_packet, "0123456789abcdef", 16);
-    radio_packet_length = 16;
+    custom_radio_packet[0] = 16;
+    memcpy(custom_radio_packet + 1, "0123456789abcdef", custom_radio_packet[0]);
 
     while (1) {
         uart_handler();
@@ -47,8 +47,8 @@ void uart_handler() {
         uart_send_array((unsigned char *) "uart buf:", 9);
         uart_send_array(uart_buf, buf_index);
 
-        memcpy(custom_radio_packet, uart_buf, buf_index);
-        radio_packet_length = buf_index;
+        custom_radio_packet[0] = buf_index;
+        memcpy(custom_radio_packet + 1, uart_buf, custom_radio_packet[0]);
 
         memset(uart_buf, 0, buf_index);
         buf_index = 0;
@@ -63,8 +63,8 @@ void radio_handler() {
     }
     if (0 == is_pkt_sending) {
         uart_send_array((unsigned char *) "send: ", 6);
-        uart_send_array(custom_radio_packet, radio_packet_length);
-        radio_start_tx_variable_packet(p_radio_configuration->radio_channel_number, custom_radio_packet, radio_packet_length);
+        uart_send_array(custom_radio_packet + 1, custom_radio_packet[0]);
+        radio_start_tx_variable_packet(p_radio_configuration->radio_channel_number, custom_radio_packet, custom_radio_packet[0] + 1);
         is_pkt_sending = 1;
         delay_ms(1000);
     }

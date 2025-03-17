@@ -9,7 +9,6 @@ const unsigned char radio_configuration_data_array[] = RADIO_CONFIGURATION_DATA_
 const radio_configuration_t radio_configuration = RADIO_CONFIGURATION_DATA;
 const radio_configuration_t *p_radio_configuration = &radio_configuration;
 unsigned char custom_radio_packet[RADIO_MAX_PACKET_LENGTH];
-unsigned char radio_packet_length;
 
 void radio_power_up(void) {
     unsigned short delay = 0;
@@ -90,7 +89,6 @@ unsigned char radio_check_received_variable_packet(void) {
         if (si4455_cmd.GET_INT_STATUS.PH_PEND & SI4455_CMD_GET_INT_STATUS_REP_PACKET_RX_PEND_BIT) {
             si4455_fifo_info(0);
             si4455_read_rx_fifo(si4455_cmd.FIFO_INFO.RX_FIFO_COUNT, custom_radio_packet);
-            radio_packet_length = si4455_cmd.FIFO_INFO.RX_FIFO_COUNT;
             return 1;
         }
 
