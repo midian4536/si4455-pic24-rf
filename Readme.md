@@ -55,7 +55,7 @@ Each transmitted packet consists of the following parts:
 | **Preamble**  | 8 bytes    | Helps the receiver detect signal presence (101010... pattern) |
 | **Sync Word** | 2 bytes    | Synchronization marker for correct packet alignment           |
 | **Length**    | 1 byte     | Number of bytes in the payload                                |
-| **Payload**   | 0-63 bytes | Actual data being transmitted (max 63 bytes)                  |
+| **Payload**   | 0-47 bytes | Actual data being transmitted (max 47 bytes)                  |
 | **CRC**       | 2 bytes    | CRC-16-IBM (initial value: 0xFFFF, high byte first)           |
 
 ## Q&A
