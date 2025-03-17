@@ -54,9 +54,11 @@ Each transmitted packet consists of the following parts:
 | ------------- | ---------- | ------------------------------------------------------------- |
 | **Preamble**  | 8 bytes    | Helps the receiver detect signal presence (101010... pattern) |
 | **Sync Word** | 2 bytes    | Synchronization marker for correct packet alignment           |
-| **Length**    | 1 byte     | Number of bytes in the payload                                |
+| **Length**    | 1 byte     | Number of bytes in the payload (0-47 bytes)                   |
 | **Payload**   | 0-47 bytes | Actual data being transmitted (max 47 bytes)                  |
 | **CRC**       | 2 bytes    | CRC-16-IBM (initial value: 0xFFFF, high byte first)           |
+
+The **FIFO threshold is set to 48 bytes** for both TX and RX. This means that the length byte allows up to **47 bytes** of payload data in each packet. The FIFO size is **64 bytes**, so the threshold can be adjusted up to 64 bytes if needed.
 
 ## Q&A
 
