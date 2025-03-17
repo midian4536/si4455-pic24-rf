@@ -13,8 +13,7 @@ void radio_comm_write_data(unsigned char cmd, unsigned char poll_cts, unsigned c
 
 unsigned char radio_comm_poll_cts(void);
 
-unsigned char radio_comm_send_cmd_get_resp(unsigned char cmd_byte_count, unsigned char *p_cmd_data,
-        unsigned char resp_byte_count, unsigned char *p_resp_data);
+unsigned char radio_comm_send_cmd_get_resp(unsigned char cmd_byte_count, unsigned char *p_cmd_data, unsigned char resp_byte_count, unsigned char *p_resp_data);
 
 void radio_comm_clear_cts(void);
 

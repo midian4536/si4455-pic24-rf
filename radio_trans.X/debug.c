@@ -1,7 +1,7 @@
 #include "debug.h"
 #include "uart.h"
 #include "si4455_api_lib.h"
-#include "utils.h"
+#include "clock.h"
 
 unsigned char hex1, hex2;
 

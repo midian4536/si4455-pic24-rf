@@ -13,14 +13,16 @@ typedef struct {
     unsigned char radio_custom_payload[RADIO_MAX_PACKET_LENGTH];
 } radio_configuration_t;
 
-extern const radio_configuration_t *p_radio_configuration;
-extern unsigned char fix_radio_packet[RADIO_MAX_PACKET_LENGTH];
 extern const unsigned char radio_configuration_data_array[];
+extern const radio_configuration_t *p_radio_configuration;
+extern unsigned char custom_radio_packet[RADIO_MAX_PACKET_LENGTH];
+extern unsigned char radio_packet_length;
 
 void radio_power_up(void);
 void radio_init(void);
-void radio_start_tx(unsigned char channel, unsigned char *pdata);
 void radio_start_rx(unsigned char channel);
+void radio_start_tx(unsigned char channel, unsigned char *pdata);
+void radio_start_tx_variable_packet(unsigned char channel, unsigned char *pdata, unsigned char length);
 
 unsigned char radio_check_received(void);
 unsigned char radio_check_transmitted(void);

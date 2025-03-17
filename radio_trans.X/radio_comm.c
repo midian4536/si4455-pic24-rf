@@ -14,7 +14,7 @@ unsigned char radio_comm_get_resp(unsigned char byte_count, unsigned char *pdata
         radio_hal_spi_write_byte(0x44);
         cts_val = radio_hal_spi_read_byte();
 
-        if (cts_val == 0xFF) {
+        if (cts_val == 0xff) {
             if (byte_count) {
                 radio_hal_spi_read_data(byte_count, pdata);
             }
@@ -31,7 +31,7 @@ unsigned char radio_comm_get_resp(unsigned char byte_count, unsigned char *pdata
         }
     }
 
-    if (cts_val == 0xFF) {
+    if (cts_val == 0xff) {
         cts_went_high = 1;
     }
 

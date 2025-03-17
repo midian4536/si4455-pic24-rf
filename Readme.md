@@ -1,13 +1,13 @@
-# Wireless Radio Frequency Communication Demo
+# Si4455 RF Communication Demo
 
-  This demo establishes a radio communication link between a **transmit board** and a **receive board** using the **Si4455 RF transceiver**. It enables wireless command transmission for applications such as **robot control**.
+This demo establishes a radio communication link between a **transmit board** and a **receive board** using the **Si4455 RF transceiver**. It enables wireless command transmission for applications such as **robot control**.
 
   ## Features
 
   - Supports **both fixed and variable-length** packet transmission.
   - Functions for checking the status of received and transmitted packets.
   - Flexible radio configuration via structured settings.
-  - Implements **CRC for data integrity**.
+  - Uses **CRC-16-IBM for error detection**.
 
   ## Requirements
 
@@ -15,8 +15,8 @@
     - **PIC24F16KA102** *(or any compatible PIC24 microcontroller)* - development platform.
     - **Si4455 RF Transceiver** - wireless communication module.
   - **Software**
-    - **MPLAB X** - development platform.
-    - **XC16 Compiler** - code compiling.
+    - **MPLAB X** - Integrated development environment (IDE) for PIC microcontrollers.
+    - **XC16 Compiler** - C compiler for PIC24.
     - **Wireless Development Suite 3** *(Optional)* - radio configuration.
 
   ## Project Structure
@@ -43,18 +43,19 @@
     - `spi.h` & `spi.c` - **SPI driver** for radio module communication.
     - `uart.h` & `uart.c` - **UART driver** for PC communication.
   - **Others**
-    - `utils.h` & `utils.c` - Utility functions (e.g., time delay).
+    - `adc.h` & `adc.c` - ADC initialization.
+    - `clock.h` & `clock.c` - Clock initialization and time delay.
 
   ## Packet Structure
 
   Each transmitted packet consists of the following parts:
 
-| Field         | Size     | Description                                            |
-| ------------- | -------- | ------------------------------------------------------ |
-| **Preamble**  | 8 bytes  | Helps the receiver detect signal presence,1010 pattern |
-| **Sync Word** | 2 bytes  | Synchronization marker for correct packet alignment    |
-| **Payload**   | 16 bytes | Actual data content being transmitted                  |
-| **CRC**       | 2 bytes  | CRC-16-IBM, initialized with all 1's, high byte first  |
+|Field|Size|Description|
+|-------------|-------|----------------------------------|
+|**Preamble**|8 bytes|Helps the receiver detect signal presence (101010... pattern)|
+|**Sync Word**|2 bytes|Synchronization marker for correct packet alignment|
+|**Payload**|16 bytes|Actual data content being transmitted|
+|**CRC**|2 bytes|CRC-16-IBM (initial value: 0xFFFF, high byte first)|
 
 ## Q&A
 
@@ -69,6 +70,7 @@ Ensure that the **PIC24 and Si4455 can communicate properly** and that both Si44
 - Ensure the **antenna is properly connected**.
 - Check for **interference from nearby electronic devices**.
 - Adjust **transmission power settings** to optimize signal strength.
+- If using a breadboard, try shortening the RF module's wiring to reduce interference.
 
 ### **Q3: Why doesn't the generated radio config file work?**
 
@@ -77,6 +79,10 @@ Modify the **include path** and the **definition of `RADIO_CONFIGURATION_DATA`**
 - If the issue persists, verify that `radio_config.h` includes all necessary parameters and that no additional modifications are required after the WDS export.
 
 ## Update History
+
+- **2025-03-17**
+  - Optimized code structure.
+  - Improved Si4455 driver.
 
 - **2025-03-12**
   - Improved **communication stability**.
@@ -102,6 +108,7 @@ Modify the **include path** and the **definition of `RADIO_CONFIGURATION_DATA`**
 
   - ~~Implement **half-duplex communication**.~~ After testing, we confirmed that **Si4455 Rev C2A** (used in this project) does not support half-duplex communication. However, **Si4455 Rev B1A** may have this capability.
   - Investigate **UART communication errors** after initialization. The issue might be caused by **fast transmission rates**—adding a small delay between transmissions could improve stability.
+  - Variable length packet transmission is not stable, awaiting subsequent refinement.
 
 ## Author Information
 

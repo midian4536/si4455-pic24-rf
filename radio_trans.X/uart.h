@@ -8,9 +8,9 @@
 #define TX LATBbits.LATB7
 
 #define END_CHAR ';'
-#define BUF_MAX_LEN 16
+#define UART_BUF_MAX_LEN 64
 
-extern unsigned char uart_buf[BUF_MAX_LEN];
+extern unsigned char uart_buf[UART_BUF_MAX_LEN];
 extern unsigned char buf_index;
 extern unsigned char recv_char;
 extern unsigned char uart_flag;

@@ -27,7 +27,7 @@ void radio_hal_spi_write_byte(unsigned char byte) {
 }
 
 unsigned char radio_hal_spi_read_byte(void) {
-    return spi_transfer(0xFF);
+    return spi_transfer(0xff);
 }
 
 void radio_hal_spi_write_data(unsigned char byte_count, unsigned char *pdata) {

@@ -41,6 +41,20 @@ void si4455_read_rx_fifo(unsigned char num_bytes, unsigned char *p_rx_data);
 
 void si4455_get_property(unsigned char group, unsigned char num_props, unsigned char start_prop);
 
+void si4455_func_info(void);
+
+void si4455_frr_a_read(unsigned char resp_bytes);
+void si4455_frr_b_read(unsigned char resp_bytes);
+void si4455_frr_c_read(unsigned char resp_bytes);
+void si4455_frr_d_read(unsigned char resp_bytes);
+
 void si4455_device_state(void);
+
+void si4455_read_cmd_buff(void);
+void si4455_get_adc_reading(unsigned char adc_en, unsigned char adc_cfg);
+
+void si4455_get_ph_status(unsigned char ph_clr_pend);
+void si4455_get_modem_status(unsigned char modem_clr_pend);
+void si4455_get_chip_status(unsigned char chip_clr_pend);
 
 #endif

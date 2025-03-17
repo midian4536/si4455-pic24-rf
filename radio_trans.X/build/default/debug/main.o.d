@@ -1,18 +1,16 @@
-build/default/debug/main.o: main.c spi.h uart.h led.h utils.h debug.h \
- radio.h radio_config.h si4455_patch.h
+build/default/debug/main.o: main.c led.h spi.h uart.h adc.h clock.h \
+ debug.h radio.h
+
+led.h:
 
 spi.h:
 
 uart.h:
 
-led.h:
+adc.h:
 
-utils.h:
+clock.h:
 
 debug.h:
 
 radio.h:
-
-radio_config.h:
-
-si4455_patch.h:

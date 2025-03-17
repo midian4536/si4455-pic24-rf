@@ -61,7 +61,7 @@ unsigned char si4455_configuration_init(unsigned char *p_set_prop_cmd) {
             p_set_prop_cmd++;
         }
 
-        if (radio_comm_send_cmd_get_resp(num_bytes, radio_cmd, 1, &response) != 0xFF) {
+        if (radio_comm_send_cmd_get_resp(num_bytes, radio_cmd, 1, &response) != 0xff) {
             return SI4455_CTS_TIMEOUT;
         }
 
@@ -89,7 +89,7 @@ void si4455_ezconfig_check(unsigned short check_sum) {
     radio_hal_spi_write_byte(SI4455_CMD_ID_EZCONFIG_CHECK);
 
     radio_hal_spi_write_byte((unsigned short) check_sum >> 8);
-    radio_hal_spi_write_byte((unsigned short) check_sum & 0x00FF);
+    radio_hal_spi_write_byte((unsigned short) check_sum & 0x00ff);
 
     radio_hal_set_nsel();
 
@@ -228,6 +228,56 @@ void si4455_get_property(unsigned char group, unsigned char num_props, unsigned 
     si4455_cmd.GET_PROPERTY.DATA15 = radio_cmd[15];
 }
 
+void si4455_func_info(void) {
+    radio_cmd[0] = SI4455_CMD_ID_FUNC_INFO;
+
+    radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_FUNC_INFO, radio_cmd, SI4455_CMD_REPLY_COUNT_FUNC_INFO, radio_cmd);
+
+    si4455_cmd.FUNC_INFO.REVEXT = radio_cmd[0];
+    si4455_cmd.FUNC_INFO.REVBRANCH = radio_cmd[1];
+    si4455_cmd.FUNC_INFO.REVINT = radio_cmd[2];
+    si4455_cmd.FUNC_INFO.PATCH = ((unsigned short) radio_cmd[3] << 8) | radio_cmd[4];
+    si4455_cmd.FUNC_INFO.FUNC = radio_cmd[5];
+    si4455_cmd.FUNC_INFO.SVNFLAGS = radio_cmd[6];
+    si4455_cmd.FUNC_INFO.SVNREV = ((unsigned long) radio_cmd[7] << 24) | ((unsigned long) radio_cmd[8] << 16) | ((unsigned long) radio_cmd[9] << 8) | radio_cmd[10];
+}
+
+void si4455_frr_a_read(unsigned char resp_bytes) {
+    radio_comm_read_data(SI4455_CMD_ID_FRR_A_READ, 0, resp_bytes, radio_cmd);
+
+    si4455_cmd.FRR_A_READ.FRR_A_VALUE = radio_cmd[0];
+    si4455_cmd.FRR_A_READ.FRR_B_VALUE = radio_cmd[1];
+    si4455_cmd.FRR_A_READ.FRR_C_VALUE = radio_cmd[2];
+    si4455_cmd.FRR_A_READ.FRR_D_VALUE = radio_cmd[3];
+}
+
+void si4455_frr_b_read(unsigned char resp_bytes) {
+    radio_comm_read_data(SI4455_CMD_ID_FRR_B_READ, 0, resp_bytes, radio_cmd);
+
+    si4455_cmd.FRR_B_READ.FRR_B_VALUE = radio_cmd[0];
+    si4455_cmd.FRR_B_READ.FRR_C_VALUE = radio_cmd[1];
+    si4455_cmd.FRR_B_READ.FRR_D_VALUE = radio_cmd[2];
+    si4455_cmd.FRR_B_READ.FRR_A_VALUE = radio_cmd[3];
+}
+
+void si4455_frr_c_read(unsigned char resp_bytes) {
+    radio_comm_read_data(SI4455_CMD_ID_FRR_C_READ, 0, resp_bytes, radio_cmd);
+
+    si4455_cmd.FRR_C_READ.FRR_C_VALUE = radio_cmd[0];
+    si4455_cmd.FRR_C_READ.FRR_D_VALUE = radio_cmd[1];
+    si4455_cmd.FRR_C_READ.FRR_A_VALUE = radio_cmd[2];
+    si4455_cmd.FRR_C_READ.FRR_B_VALUE = radio_cmd[3];
+}
+
+void si4455_frr_d_read(unsigned char resp_bytes) {
+    radio_comm_read_data(SI4455_CMD_ID_FRR_D_READ, 0, resp_bytes, radio_cmd);
+
+    si4455_cmd.FRR_D_READ.FRR_D_VALUE = radio_cmd[0];
+    si4455_cmd.FRR_D_READ.FRR_A_VALUE = radio_cmd[1];
+    si4455_cmd.FRR_D_READ.FRR_B_VALUE = radio_cmd[2];
+    si4455_cmd.FRR_D_READ.FRR_C_VALUE = radio_cmd[3];
+}
+
 void si4455_device_state() {
     radio_cmd[0] = SI4455_CMD_ID_REQUEST_DEVICE_STATE;
 
@@ -235,4 +285,77 @@ void si4455_device_state() {
 
     si4455_cmd.REQUEST_DEVICE_STATE.CURR_STATE = radio_cmd[0];
     si4455_cmd.REQUEST_DEVICE_STATE.CURRENT_CHANNEL = radio_cmd[1];
+}
+
+void si4455_read_cmd_buff(void) {
+    radio_cmd[0] = SI4455_CMD_ID_READ_CMD_BUFF;
+
+    radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_READ_CMD_BUFF, radio_cmd, SI4455_CMD_REPLY_COUNT_READ_CMD_BUFF, radio_cmd);
+
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF0 = radio_cmd[0];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF1 = radio_cmd[1];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF2 = radio_cmd[2];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF3 = radio_cmd[3];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF4 = radio_cmd[4];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF5 = radio_cmd[5];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF6 = radio_cmd[6];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF7 = radio_cmd[7];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF8 = radio_cmd[8];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF9 = radio_cmd[9];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF10 = radio_cmd[10];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF11 = radio_cmd[11];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF12 = radio_cmd[12];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF13 = radio_cmd[13];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF14 = radio_cmd[14];
+    si4455_cmd.READ_CMD_BUFF.CMD_BUFF15 = radio_cmd[15];
+}
+
+void si4455_get_adc_reading(unsigned char adc_en, unsigned char adc_cfg) {
+    radio_cmd[0] = SI4455_CMD_ID_GET_ADC_READING;
+    radio_cmd[1] = adc_en;
+    radio_cmd[2] = adc_cfg;
+
+    radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_GET_ADC_READING, radio_cmd, SI4455_CMD_REPLY_COUNT_GET_ADC_READING, radio_cmd);
+
+    si4455_cmd.GET_ADC_READING.GPIO_ADC = ((unsigned short) radio_cmd[0] << 8) | radio_cmd[1];
+    si4455_cmd.GET_ADC_READING.BATTERY_ADC = ((unsigned short) radio_cmd[2] << 8) | radio_cmd[3];
+    si4455_cmd.GET_ADC_READING.TEMP_ADC = ((unsigned short) radio_cmd[4] << 8) | radio_cmd[5];
+    si4455_cmd.GET_ADC_READING.TEMP_SLOPE = radio_cmd[6];
+    si4455_cmd.GET_ADC_READING.TEMP_INTERCEPT = radio_cmd[7];
+}
+
+void si4455_get_ph_status(unsigned char ph_clr_pend) {
+    radio_cmd[0] = SI4455_CMD_ID_GET_PH_STATUS;
+    radio_cmd[1] = ph_clr_pend;
+
+    radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_GET_PH_STATUS, radio_cmd, SI4455_CMD_REPLY_COUNT_GET_PH_STATUS, radio_cmd);
+
+    si4455_cmd.GET_PH_STATUS.PH_PEND = radio_cmd[0];
+    si4455_cmd.GET_PH_STATUS.PH_STATUS = radio_cmd[1];
+}
+
+void si4455_get_modem_status(unsigned char modem_clr_pend) {
+    radio_cmd[0] = SI4455_CMD_ID_GET_MODEM_STATUS;
+    radio_cmd[1] = modem_clr_pend;
+
+    radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_GET_MODEM_STATUS, radio_cmd, SI4455_CMD_REPLY_COUNT_GET_MODEM_STATUS, radio_cmd);
+
+    si4455_cmd.GET_MODEM_STATUS.MODEM_PEND = radio_cmd[0];
+    si4455_cmd.GET_MODEM_STATUS.MODEM_STATUS = radio_cmd[1];
+    si4455_cmd.GET_MODEM_STATUS.CURR_RSSI = radio_cmd[2];
+    si4455_cmd.GET_MODEM_STATUS.LATCH_RSSI = radio_cmd[3];
+    si4455_cmd.GET_MODEM_STATUS.ANT1_RSSI = radio_cmd[4];
+    si4455_cmd.GET_MODEM_STATUS.ANT2_RSSI = radio_cmd[5];
+    si4455_cmd.GET_MODEM_STATUS.AFC_FREQ_OFFSET = ((unsigned short) radio_cmd[6] << 8) | radio_cmd[7];
+}
+
+void si4455_get_chip_status(unsigned char chip_clr_pend) {
+    radio_cmd[0] = SI4455_CMD_ID_GET_CHIP_STATUS;
+    radio_cmd[1] = chip_clr_pend;
+
+    radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_GET_CHIP_STATUS, radio_cmd, SI4455_CMD_REPLY_COUNT_GET_CHIP_STATUS, radio_cmd);
+
+    si4455_cmd.GET_CHIP_STATUS.CHIP_PEND = radio_cmd[0];
+    si4455_cmd.GET_CHIP_STATUS.CHIP_STATUS = radio_cmd[1];
+    si4455_cmd.GET_CHIP_STATUS.CMD_ERR_STATUS = radio_cmd[2];
 }

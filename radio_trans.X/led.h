@@ -2,7 +2,6 @@
 #define LED_H
 
 #define TRIS_LED TRISAbits.TRISA6
-
 #define LED LATAbits.LATA6
 
 void led_init();

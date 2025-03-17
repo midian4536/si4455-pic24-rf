@@ -1,7 +1,7 @@
 #include "xc.h"
 #include "uart.h"
 
-unsigned char uart_buf[BUF_MAX_LEN];
+unsigned char uart_buf[UART_BUF_MAX_LEN];
 unsigned char buf_index;
 unsigned char recv_char;
 unsigned char uart_flag;
@@ -53,9 +53,9 @@ void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
 
     if (U1STAbits.URXDA) {
         recv_char = U1RXREG;
-        if (recv_char == END_CHAR || buf_index >= BUF_MAX_LEN) {
+        if (recv_char == END_CHAR || buf_index >= UART_BUF_MAX_LEN) {
             uart_flag = 1;
-        } else if (buf_index < BUF_MAX_LEN) {
+        } else if (buf_index < UART_BUF_MAX_LEN) {
             uart_buf[buf_index++] = recv_char;
         }
     }

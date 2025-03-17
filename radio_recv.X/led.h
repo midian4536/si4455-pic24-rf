@@ -2,7 +2,6 @@
 #define LED_H
 
 #define TRIS_LED TRISBbits.TRISB12
-
 #define LED LATBbits.LATB12
 
 void led_init();

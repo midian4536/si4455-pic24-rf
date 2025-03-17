@@ -5,21 +5,24 @@
 #include "p24F16KA102.h"
 #include "string.h"
 
+#include "led.h"
 #include "spi.h"
 #include "uart.h"
-#include "led.h"
 
-#include "utils.h"
+#include "adc.h"
+
+#include "clock.h"
 #include "debug.h"
 
 #include "radio.h"
-#include "radio_config.h"
 
-void handler();
+void uart_handler();
+void radio_handler();
 
 int main(void) {
-    AD1PCFG = 0xffff;
-    CLKDIVbits.RCDIV = 0;
+    clock_init();
+    adc_init();
+    
     led_init();
     spi_init();
     uart_init();
@@ -31,28 +34,30 @@ int main(void) {
     led_shine(3, 100);
 
     while (1) {
-        handler();
-        if (uart_flag) {
-            uart_send_array((unsigned char *) "uart buf:", 9);
-            uart_send_array(uart_buf, BUF_MAX_LEN);
-            memset(uart_buf, 0, BUF_MAX_LEN);
-            buf_index = 0;
-            uart_flag = 0;
-        }
+        uart_handler();
+        radio_handler();
     }
     return 0;
 }
 
-void handler() {
+void uart_handler() {
+    if (uart_flag) {
+        uart_send_array((unsigned char *) "uart buf:", 9);
+        uart_send_array(uart_buf, buf_index);
+        memset(uart_buf, 0, buf_index);
+        buf_index = 0;
+        uart_flag = 0;
+    }
+}
+
+void radio_handler() {
     if (1 == radio_check_received_variable_packet()) {
         switch (p_radio_configuration->radio_variable_packet_state) {
             case 0:
-                uart_send_array(fix_radio_packet, 16);
-                led_shine(1, (fix_radio_packet[9] - '0')*100);
+                uart_send_array(custom_radio_packet, radio_packet_length);
                 break;
             case 1:
-                uart_send_array(fix_radio_packet, 16);
-                led_shine(1, (fix_radio_packet[9] - '0')*100);
+                uart_send_array(custom_radio_packet, radio_packet_length);
                 break;
             default:
                 break;

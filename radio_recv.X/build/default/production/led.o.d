@@ -1,5 +1,5 @@
-build/default/production/led.o: led.c led.h utils.h
+build/default/production/led.o: led.c led.h clock.h
 
 led.h:
 
-utils.h:
+clock.h:

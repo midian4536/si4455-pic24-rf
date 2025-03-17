@@ -5,21 +5,24 @@
 #include "p24F16KA102.h"
 #include "string.h"
 
+#include "led.h"
 #include "spi.h"
 #include "uart.h"
-#include "led.h"
 
-#include "utils.h"
+#include "adc.h"
+
+#include "clock.h"
 #include "debug.h"
 
 #include "radio.h"
-#include "radio_config.h"
 
-void handler();
+void uart_handler();
+void radio_handler();
 
 int main(void) {
-    AD1PCFG = 0xffff;
-    CLKDIVbits.RCDIV = 0;
+    clock_init();
+    adc_init();
+    
     led_init();
     spi_init();
     uart_init();
@@ -29,30 +32,39 @@ int main(void) {
     uart_send_array((unsigned char *) "4455 initialized", 16);
     led_shine(3, 300);
 
-    memcpy(fix_radio_packet, "0123456789abcdef", 16);
+    memcpy(custom_radio_packet, "0123456789abcdef", 16);
+    radio_packet_length = 16;
+
     while (1) {
-        handler();
-        if (uart_flag) {
-            uart_send_array((unsigned char *) "uart buf:", 9);
-            uart_send_array(uart_buf, BUF_MAX_LEN);
-            memcpy(fix_radio_packet, uart_buf, 16);
-            memset(uart_buf, 0, BUF_MAX_LEN);
-            buf_index = 0;
-            uart_flag = 0;
-        }
+        uart_handler();
+        radio_handler();
     }
     return 0;
 }
 
-void handler() {
+void uart_handler() {
+    if (uart_flag) {
+        uart_send_array((unsigned char *) "uart buf:", 9);
+        uart_send_array(uart_buf, buf_index);
+
+        memcpy(custom_radio_packet, uart_buf, buf_index);
+        radio_packet_length = buf_index;
+
+        memset(uart_buf, 0, buf_index);
+        buf_index = 0;
+        uart_flag = 0;
+    }
+}
+
+void radio_handler() {
     static unsigned char is_pkt_sending = 0;
     if (1 == radio_check_transmitted()) {
         is_pkt_sending = 0;
     }
     if (0 == is_pkt_sending) {
         uart_send_array((unsigned char *) "send: ", 6);
-        uart_send_array(fix_radio_packet, 16);
-        radio_start_tx(p_radio_configuration->radio_channel_number, fix_radio_packet);
+        uart_send_array(custom_radio_packet, radio_packet_length);
+        radio_start_tx_variable_packet(p_radio_configuration->radio_channel_number, custom_radio_packet, radio_packet_length);
         is_pkt_sending = 1;
         delay_ms(1000);
     }
