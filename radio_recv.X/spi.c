@@ -24,7 +24,7 @@ void spi_init(void) {
     SPI1STATbits.SPIEN = 1;
 }
 
-unsigned char spi_transfer(unsigned char data) {
+uint8_t spi_transfer(uint8_t data) {
     SPI1BUF = data;
     while (!IFS0bits.SPI1IF)
         ;
@@ -32,17 +32,17 @@ unsigned char spi_transfer(unsigned char data) {
     return SPI1BUF;
 }
 
-void spi_send_array(unsigned char *pdata, unsigned char length) {
+void spi_send_array(uint8_t *pdata, uint8_t length) {
     nSel = 0;
-    for (unsigned char i = 0; i < length; i++) {
+    for (uint8_t i = 0; i < length; i++) {
         spi_transfer(pdata[i]);
     }
     nSel = 1;
 }
 
-void spi_recv_array(unsigned char *pdata, unsigned char length) {
+void spi_recv_array(uint8_t *pdata, uint8_t length) {
     nSel = 0;
-    for (unsigned char i = 0; i < length; i++) {
+    for (uint8_t i = 0; i < length; i++) {
         pdata[i] = spi_transfer(0xFF);
     }
     nSel = 1;

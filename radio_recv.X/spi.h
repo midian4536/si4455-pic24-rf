@@ -21,9 +21,9 @@
 
 void spi_init(void);
 
-unsigned char spi_transfer(unsigned char data);
+uint8_t spi_transfer(uint8_t data);
 
-void spi_send_array(unsigned char *pdata, unsigned char length);
-void spi_recv_array(unsigned char *pdata, unsigned char length);
+void spi_send_array(uint8_t *pdata, uint8_t length);
+void spi_recv_array(uint8_t *pdata, uint8_t length);
 
 #endif

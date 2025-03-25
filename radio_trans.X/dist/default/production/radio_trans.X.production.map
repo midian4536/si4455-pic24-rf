@@ -29,6 +29,7 @@ Command:
   build/default/production/main.o \
   build/default/production/clock.o \
   build/default/production/adc.o \
+  build/default/production/eeprom.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24F16KA102.gld.00 \
   --stack=16 \
@@ -81,12 +82,12 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x204           0x306  (774)
-.const                       0x404               0x4c6           0x729  (1833)
-.text                        0x8ca               0xd40          0x13e0  (5088)
-.dinit                      0x160a                0x2e            0x45  (69)
-.text                       0x1638                 0xa             0xf  (15)
+.const                       0x404               0x4d8           0x744  (1860)
+.text                        0x8dc               0xfa4          0x1776  (6006)
+.dinit                      0x1880                0x2e            0x45  (69)
+.text                       0x18ae                 0xa             0xf  (15)
 
-                 Total "program" memory used (bytes):         0x1e63  (7779) 48%
+                 Total "program" memory used (bytes):         0x2214  (8724) 54%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -155,76 +156,85 @@ External Symbols in Program Memory (by address):
                   0x0003f8                  ___mulp32peds3
                   0x000404                  _radio_configuration_data_array
                   0x000756                  _radio_configuration
-                  0x0008ca                  _si4455_reset
-                  0x0008f2                  _si4455_power_up
-                  0x000940                  _si4455_configuration_init
-                  0x0009f4                  _si4455_write_ezconfig_array
-                  0x000a08                  _si4455_ezconfig_check
-                  0x000a2c                  _si4455_start_tx
-                  0x000a5c                  _si4455_start_rx
-                  0x000aa4                  _si4455_get_int_status
-                  0x000af0                  _si4455_gpio_pin_cfg
-                  0x000b58                  _si4455_change_state
-                  0x000b70                  _si4455_nop
-                  0x000b7e                  _si4455_fifo_info
-                  0x000ba2                  _si4455_part_info
-                  0x000be6                  _si4455_write_tx_fifo
-                  0x000bfa                  _si4455_read_rx_fifo
-                  0x000c0e                  _si4455_get_property
-                  0x000c7c                  _si4455_func_info
-                  0x000cea                  _si4455_frr_a_read
-                  0x000d0c                  _si4455_frr_b_read
-                  0x000d2e                  _si4455_frr_c_read
-                  0x000d50                  _si4455_frr_d_read
-                  0x000d72                  _si4455_device_state
-                  0x000d8e                  _si4455_read_cmd_buff
-                  0x000de2                  _si4455_get_adc_reading
-                  0x000e38                  _si4455_get_ph_status
-                  0x000e5c                  _si4455_get_modem_status
-                  0x000e9e                  _si4455_get_chip_status
-                  0x000ec6                  _char_to_hex
-                  0x000f06                  _show_si4455_properties
-                  0x001032                  _show_si4455_fifo
-                  0x001078                  _show_si4455_state
-                  0x0010bc                  _radio_power_up
-                  0x0010d4                  _radio_init
-                  0x00110a                  _radio_start_rx
-                  0x00112c                  _radio_start_tx
-                  0x001158                  _radio_start_tx_variable_packet
-                  0x001182                  _radio_check_received
-                  0x0011c0                  _radio_check_transmitted
-                  0x0011ea                  _radio_check_received_variable_packet
-                  0x001240                  _radio_comm_get_resp
-                  0x001296                  _radio_comm_send_cmd
-                  0x0012b6                  _radio_comm_read_data
-                  0x0012e4                  _radio_comm_write_data
-                  0x001312                  _radio_comm_poll_cts
-                  0x00131e                  _radio_comm_send_cmd_get_resp
-                  0x001338                  _radio_comm_clear_cts
-                  0x001340                  _spi_init
-                  0x001378                  _spi_transfer
-                  0x001396                  _spi_send_array
-                  0x0013be                  _spi_recv_array
-                  0x0013ec                  _main
-                  0x001422                  _uart_handler
-                  0x00145e                  _radio_handler
-                  0x001498                  _uart_init
-                  0x0014de                  _uart_send_char
-                  0x001502                  _uart_send_array
-                  0x00153e                  _radio_hal_assert_shut_down
-                  0x001546                  _radio_hal_deassert_shut_down
-                  0x00154e                  _radio_hal_clear_nsel
-                  0x001556                  _radio_hal_set_nsel
-                  0x00155e                  _radio_hal_nirq_level
-                  0x00156a                  _radio_hal_spi_write_byte
-                  0x001576                  _radio_hal_spi_read_byte
-                  0x001580                  _radio_hal_spi_write_data
-                  0x001590                  _radio_hal_spi_read_data
-                  0x0015a0                  _clock_init
-                  0x0015ae                  _delay_ms
-                  0x0015da                  _led_init
-                  0x0015e4                  _led_shine
-                  0x001638                  _adc_init
+                  0x0008dc                  _si4455_reset
+                  0x000904                  _si4455_power_up
+                  0x000952                  _si4455_configuration_init
+                  0x000a06                  _si4455_write_ezconfig_array
+                  0x000a1a                  _si4455_ezconfig_check
+                  0x000a3e                  _si4455_start_tx
+                  0x000a6e                  _si4455_start_rx
+                  0x000ab6                  _si4455_get_int_status
+                  0x000b02                  _si4455_gpio_pin_cfg
+                  0x000b6a                  _si4455_change_state
+                  0x000b82                  _si4455_nop
+                  0x000b90                  _si4455_fifo_info
+                  0x000bb4                  _si4455_part_info
+                  0x000bf8                  _si4455_write_tx_fifo
+                  0x000c0c                  _si4455_read_rx_fifo
+                  0x000c20                  _si4455_get_property
+                  0x000c8e                  _si4455_func_info
+                  0x000cfc                  _si4455_frr_a_read
+                  0x000d1e                  _si4455_frr_b_read
+                  0x000d40                  _si4455_frr_c_read
+                  0x000d62                  _si4455_frr_d_read
+                  0x000d84                  _si4455_device_state
+                  0x000da0                  _si4455_read_cmd_buff
+                  0x000df4                  _si4455_get_adc_reading
+                  0x000e4a                  _si4455_get_ph_status
+                  0x000e6e                  _si4455_get_modem_status
+                  0x000eb0                  _si4455_get_chip_status
+                  0x000efa                  _eeprom_write_word
+                  0x000f20                  _eeprom_read_word
+                  0x000f3c                  _eeprom_write_byte
+                  0x000fa6                  _eeprom_read_byte
+                  0x000ff4                  _eeprom_write_word_array
+                  0x00102e                  _eeprom_read_word_array
+                  0x00106a                  _eeprom_write_byte_array
+                  0x00109e                  _eeprom_read_byte_array
+                  0x0010d4                  _eeprom_erase_all
+                  0x0010fc                  _char_to_hex
+                  0x00113c                  _show_si4455_properties
+                  0x001268                  _show_si4455_fifo
+                  0x0012ae                  _show_si4455_state
+                  0x0012f2                  _radio_power_up
+                  0x00130a                  _radio_init
+                  0x001340                  _radio_start_rx
+                  0x001362                  _radio_start_tx
+                  0x00138e                  _radio_start_tx_variable_packet
+                  0x0013b8                  _radio_check_received
+                  0x0013f6                  _radio_check_transmitted
+                  0x001420                  _radio_check_received_variable_packet
+                  0x001476                  _radio_comm_get_resp
+                  0x0014cc                  _radio_comm_send_cmd
+                  0x0014ec                  _radio_comm_read_data
+                  0x00151a                  _radio_comm_write_data
+                  0x001548                  _radio_comm_poll_cts
+                  0x001554                  _radio_comm_send_cmd_get_resp
+                  0x00156e                  _radio_comm_clear_cts
+                  0x001576                  _main
+                  0x0015ec                  _uart_handler
+                  0x001628                  _radio_handler
+                  0x001662                  _spi_init
+                  0x00169a                  _spi_transfer
+                  0x0016b8                  _spi_send_array
+                  0x0016e0                  _spi_recv_array
+                  0x00170e                  _uart_init
+                  0x001754                  _uart_send_char
+                  0x001778                  _uart_send_array
+                  0x0017b4                  _radio_hal_assert_shut_down
+                  0x0017bc                  _radio_hal_deassert_shut_down
+                  0x0017c4                  _radio_hal_clear_nsel
+                  0x0017cc                  _radio_hal_set_nsel
+                  0x0017d4                  _radio_hal_nirq_level
+                  0x0017e0                  _radio_hal_spi_write_byte
+                  0x0017ec                  _radio_hal_spi_read_byte
+                  0x0017f6                  _radio_hal_spi_write_data
+                  0x001806                  _radio_hal_spi_read_data
+                  0x001816                  _clock_init
+                  0x001824                  _delay_ms
+                  0x001850                  _led_init
+                  0x00185a                  _led_shine
+                  0x0018ae                  _adc_init
 
 External Symbols in Program Memory (by name):
 
@@ -237,80 +247,89 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x001638                  _adc_init
-                  0x000ec6                  _char_to_hex
-                  0x0015a0                  _clock_init
-                  0x0015ae                  _delay_ms
-                  0x0015da                  _led_init
-                  0x0015e4                  _led_shine
-                  0x0013ec                  _main
+                  0x0018ae                  _adc_init
+                  0x0010fc                  _char_to_hex
+                  0x001816                  _clock_init
+                  0x001824                  _delay_ms
+                  0x0010d4                  _eeprom_erase_all
+                  0x000fa6                  _eeprom_read_byte
+                  0x00109e                  _eeprom_read_byte_array
+                  0x000f20                  _eeprom_read_word
+                  0x00102e                  _eeprom_read_word_array
+                  0x000f3c                  _eeprom_write_byte
+                  0x00106a                  _eeprom_write_byte_array
+                  0x000efa                  _eeprom_write_word
+                  0x000ff4                  _eeprom_write_word_array
+                  0x001850                  _led_init
+                  0x00185a                  _led_shine
+                  0x001576                  _main
                   0x000322                  _memcpy
                   0x000330                  _memset
-                  0x001182                  _radio_check_received
-                  0x0011ea                  _radio_check_received_variable_packet
-                  0x0011c0                  _radio_check_transmitted
-                  0x001338                  _radio_comm_clear_cts
-                  0x001240                  _radio_comm_get_resp
-                  0x001312                  _radio_comm_poll_cts
-                  0x0012b6                  _radio_comm_read_data
-                  0x001296                  _radio_comm_send_cmd
-                  0x00131e                  _radio_comm_send_cmd_get_resp
-                  0x0012e4                  _radio_comm_write_data
+                  0x0013b8                  _radio_check_received
+                  0x001420                  _radio_check_received_variable_packet
+                  0x0013f6                  _radio_check_transmitted
+                  0x00156e                  _radio_comm_clear_cts
+                  0x001476                  _radio_comm_get_resp
+                  0x001548                  _radio_comm_poll_cts
+                  0x0014ec                  _radio_comm_read_data
+                  0x0014cc                  _radio_comm_send_cmd
+                  0x001554                  _radio_comm_send_cmd_get_resp
+                  0x00151a                  _radio_comm_write_data
                   0x000756                  _radio_configuration
                   0x000404                  _radio_configuration_data_array
-                  0x00153e                  _radio_hal_assert_shut_down
-                  0x00154e                  _radio_hal_clear_nsel
-                  0x001546                  _radio_hal_deassert_shut_down
-                  0x00155e                  _radio_hal_nirq_level
-                  0x001556                  _radio_hal_set_nsel
-                  0x001576                  _radio_hal_spi_read_byte
-                  0x001590                  _radio_hal_spi_read_data
-                  0x00156a                  _radio_hal_spi_write_byte
-                  0x001580                  _radio_hal_spi_write_data
-                  0x00145e                  _radio_handler
-                  0x0010d4                  _radio_init
-                  0x0010bc                  _radio_power_up
-                  0x00110a                  _radio_start_rx
-                  0x00112c                  _radio_start_tx
-                  0x001158                  _radio_start_tx_variable_packet
-                  0x001032                  _show_si4455_fifo
-                  0x000f06                  _show_si4455_properties
-                  0x001078                  _show_si4455_state
-                  0x000b58                  _si4455_change_state
-                  0x000940                  _si4455_configuration_init
-                  0x000d72                  _si4455_device_state
-                  0x000a08                  _si4455_ezconfig_check
-                  0x000b7e                  _si4455_fifo_info
-                  0x000cea                  _si4455_frr_a_read
-                  0x000d0c                  _si4455_frr_b_read
-                  0x000d2e                  _si4455_frr_c_read
-                  0x000d50                  _si4455_frr_d_read
-                  0x000c7c                  _si4455_func_info
-                  0x000de2                  _si4455_get_adc_reading
-                  0x000e9e                  _si4455_get_chip_status
-                  0x000aa4                  _si4455_get_int_status
-                  0x000e5c                  _si4455_get_modem_status
-                  0x000e38                  _si4455_get_ph_status
-                  0x000c0e                  _si4455_get_property
-                  0x000af0                  _si4455_gpio_pin_cfg
-                  0x000b70                  _si4455_nop
-                  0x000ba2                  _si4455_part_info
-                  0x0008f2                  _si4455_power_up
-                  0x000d8e                  _si4455_read_cmd_buff
-                  0x000bfa                  _si4455_read_rx_fifo
-                  0x0008ca                  _si4455_reset
-                  0x000a5c                  _si4455_start_rx
-                  0x000a2c                  _si4455_start_tx
-                  0x0009f4                  _si4455_write_ezconfig_array
-                  0x000be6                  _si4455_write_tx_fifo
-                  0x001340                  _spi_init
-                  0x0013be                  _spi_recv_array
-                  0x001396                  _spi_send_array
-                  0x001378                  _spi_transfer
-                  0x001422                  _uart_handler
-                  0x001498                  _uart_init
-                  0x001502                  _uart_send_array
-                  0x0014de                  _uart_send_char
+                  0x0017b4                  _radio_hal_assert_shut_down
+                  0x0017c4                  _radio_hal_clear_nsel
+                  0x0017bc                  _radio_hal_deassert_shut_down
+                  0x0017d4                  _radio_hal_nirq_level
+                  0x0017cc                  _radio_hal_set_nsel
+                  0x0017ec                  _radio_hal_spi_read_byte
+                  0x001806                  _radio_hal_spi_read_data
+                  0x0017e0                  _radio_hal_spi_write_byte
+                  0x0017f6                  _radio_hal_spi_write_data
+                  0x001628                  _radio_handler
+                  0x00130a                  _radio_init
+                  0x0012f2                  _radio_power_up
+                  0x001340                  _radio_start_rx
+                  0x001362                  _radio_start_tx
+                  0x00138e                  _radio_start_tx_variable_packet
+                  0x001268                  _show_si4455_fifo
+                  0x00113c                  _show_si4455_properties
+                  0x0012ae                  _show_si4455_state
+                  0x000b6a                  _si4455_change_state
+                  0x000952                  _si4455_configuration_init
+                  0x000d84                  _si4455_device_state
+                  0x000a1a                  _si4455_ezconfig_check
+                  0x000b90                  _si4455_fifo_info
+                  0x000cfc                  _si4455_frr_a_read
+                  0x000d1e                  _si4455_frr_b_read
+                  0x000d40                  _si4455_frr_c_read
+                  0x000d62                  _si4455_frr_d_read
+                  0x000c8e                  _si4455_func_info
+                  0x000df4                  _si4455_get_adc_reading
+                  0x000eb0                  _si4455_get_chip_status
+                  0x000ab6                  _si4455_get_int_status
+                  0x000e6e                  _si4455_get_modem_status
+                  0x000e4a                  _si4455_get_ph_status
+                  0x000c20                  _si4455_get_property
+                  0x000b02                  _si4455_gpio_pin_cfg
+                  0x000b82                  _si4455_nop
+                  0x000bb4                  _si4455_part_info
+                  0x000904                  _si4455_power_up
+                  0x000da0                  _si4455_read_cmd_buff
+                  0x000c0c                  _si4455_read_rx_fifo
+                  0x0008dc                  _si4455_reset
+                  0x000a6e                  _si4455_start_rx
+                  0x000a3e                  _si4455_start_tx
+                  0x000a06                  _si4455_write_ezconfig_array
+                  0x000bf8                  _si4455_write_tx_fifo
+                  0x001662                  _spi_init
+                  0x0016e0                  _spi_recv_array
+                  0x0016b8                  _spi_send_array
+                  0x00169a                  _spi_transfer
+                  0x0015ec                  _uart_handler
+                  0x00170e                  _uart_init
+                  0x001778                  _uart_send_array
+                  0x001754                  _uart_send_char
 
 Memory Configuration
 
@@ -345,6 +364,7 @@ LOAD build/default/production/uart.o
 LOAD build/default/production/main.o
 LOAD build/default/production/clock.o
 LOAD build/default/production/adc.o
+LOAD build/default/production/eeprom.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libfx-elf.a
@@ -435,53 +455,56 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x5c43
+.debug_info       0x000000       0x6395
  *(.debug_info)
- .debug_info      0x000000        0x1d5 build/default/production/debug.o
- .debug_info      0x0001d5        0x349 build/default/production/led.o
- .debug_info      0x00051e       0x141b build/default/production/radio.o
- .debug_info      0x001939        0x3b3 build/default/production/radio_comm.o
- .debug_info      0x001cec        0x6ce build/default/production/radio_hal.o
- .debug_info      0x0023ba       0x16b5 build/default/production/si4455_api_lib.o
- .debug_info      0x003a6f        0xbef build/default/production/spi.o
- .debug_info      0x00465e        0xdc8 build/default/production/uart.o
- .debug_info      0x005426        0x33b build/default/production/main.o
- .debug_info      0x005761        0x2e5 build/default/production/clock.o
- .debug_info      0x005a46        0x171 build/default/production/adc.o
- .debug_info      0x005bb7         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_info      0x000000        0x24c build/default/production/debug.o
+ .debug_info      0x00024c        0x340 build/default/production/led.o
+ .debug_info      0x00058c       0x141b build/default/production/radio.o
+ .debug_info      0x0019a7        0x3b3 build/default/production/radio_comm.o
+ .debug_info      0x001d5a        0x6d4 build/default/production/radio_hal.o
+ .debug_info      0x00242e       0x16c5 build/default/production/si4455_api_lib.o
+ .debug_info      0x003af3        0xbf5 build/default/production/spi.o
+ .debug_info      0x0046e8        0xdce build/default/production/uart.o
+ .debug_info      0x0054b6        0x379 build/default/production/main.o
+ .debug_info      0x00582f        0x2dc build/default/production/clock.o
+ .debug_info      0x005b0b        0x168 build/default/production/adc.o
+ .debug_info      0x005c73        0x696 build/default/production/eeprom.o
+ .debug_info      0x006309         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0xaba
+.debug_abbrev     0x000000        0xc35
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xa6 build/default/production/debug.o
- .debug_abbrev    0x0000a6         0xc6 build/default/production/led.o
- .debug_abbrev    0x00016c        0x189 build/default/production/radio.o
- .debug_abbrev    0x0002f5         0xd3 build/default/production/radio_comm.o
- .debug_abbrev    0x0003c8         0xdf build/default/production/radio_hal.o
- .debug_abbrev    0x0004a7        0x186 build/default/production/si4455_api_lib.o
- .debug_abbrev    0x00062d        0x125 build/default/production/spi.o
- .debug_abbrev    0x000752        0x140 build/default/production/uart.o
- .debug_abbrev    0x000892         0xc9 build/default/production/main.o
- .debug_abbrev    0x00095b         0xf2 build/default/production/clock.o
- .debug_abbrev    0x000a4d         0x59 build/default/production/adc.o
- .debug_abbrev    0x000aa6         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_abbrev    0x000000         0xb3 build/default/production/debug.o
+ .debug_abbrev    0x0000b3         0xc6 build/default/production/led.o
+ .debug_abbrev    0x000179        0x189 build/default/production/radio.o
+ .debug_abbrev    0x000302         0xe0 build/default/production/radio_comm.o
+ .debug_abbrev    0x0003e2         0xdf build/default/production/radio_hal.o
+ .debug_abbrev    0x0004c1        0x193 build/default/production/si4455_api_lib.o
+ .debug_abbrev    0x000654        0x125 build/default/production/spi.o
+ .debug_abbrev    0x000779        0x140 build/default/production/uart.o
+ .debug_abbrev    0x0008b9         0xcb build/default/production/main.o
+ .debug_abbrev    0x000984         0xf2 build/default/production/clock.o
+ .debug_abbrev    0x000a76         0x59 build/default/production/adc.o
+ .debug_abbrev    0x000acf        0x152 build/default/production/eeprom.o
+ .debug_abbrev    0x000c21         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_line       0x000000        0xb56
+.debug_line       0x000000        0xde4
  *(.debug_line)
- .debug_line      0x000000         0xa4 build/default/production/debug.o
- .debug_line      0x0000a4        0x10c build/default/production/led.o
- .debug_line      0x0001b0        0x173 build/default/production/radio.o
- .debug_line      0x000323         0x88 build/default/production/radio_comm.o
- .debug_line      0x0003ab        0x121 build/default/production/radio_hal.o
- .debug_line      0x0004cc        0x171 build/default/production/si4455_api_lib.o
- .debug_line      0x00063d        0x127 build/default/production/spi.o
- .debug_line      0x000764        0x140 build/default/production/uart.o
- .debug_line      0x0008a4         0x6a build/default/production/main.o
- .debug_line      0x00090e        0x10b build/default/production/clock.o
- .debug_line      0x000a19        0x103 build/default/production/adc.o
- .debug_line      0x000b1c         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_line      0x000000         0xf3 build/default/production/debug.o
+ .debug_line      0x0000f3        0x10c build/default/production/led.o
+ .debug_line      0x0001ff        0x173 build/default/production/radio.o
+ .debug_line      0x000372         0xd7 build/default/production/radio_comm.o
+ .debug_line      0x000449        0x121 build/default/production/radio_hal.o
+ .debug_line      0x00056a        0x1c0 build/default/production/si4455_api_lib.o
+ .debug_line      0x00072a        0x127 build/default/production/spi.o
+ .debug_line      0x000851        0x140 build/default/production/uart.o
+ .debug_line      0x000991         0xc2 build/default/production/main.o
+ .debug_line      0x000a53        0x10b build/default/production/clock.o
+ .debug_line      0x000b5e        0x103 build/default/production/adc.o
+ .debug_line      0x000c61        0x149 build/default/production/eeprom.o
+ .debug_line      0x000daa         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_frame      0x000000        0x82c
+.debug_frame      0x000000        0x964
  *(.debug_frame)
  .debug_frame     0x000000         0x7c build/default/production/debug.o
  .debug_frame     0x00007c         0x48 build/default/production/led.o
@@ -494,8 +517,9 @@ __FDS
  .debug_frame     0x000754         0x62 build/default/production/main.o
  .debug_frame     0x0007b6         0x48 build/default/production/clock.o
  .debug_frame     0x0007fe         0x2e build/default/production/adc.o
+ .debug_frame     0x00082c        0x138 build/default/production/eeprom.o
 
-.debug_str        0x000000        0x324
+.debug_str        0x000000        0x345
  *(.debug_str)
  .debug_str       0x000000          0xa build/default/production/debug.o
  .debug_str       0x00000a         0x13 build/default/production/led.o
@@ -507,6 +531,7 @@ __FDS
  .debug_str       0x000268         0x6a build/default/production/uart.o
  .debug_str       0x0002d2         0x47 build/default/production/main.o
  .debug_str       0x000319          0xb build/default/production/clock.o
+ .debug_str       0x000324         0x21 build/default/production/eeprom.o
 
 .debug_loc
  *(.debug_loc)
@@ -515,7 +540,7 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x7f0
+                  0x000000        0x8db
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x7a build/default/production/debug.o
@@ -539,11 +564,13 @@ __FDS
                   0x0007a3         0x2e build/default/production/clock.o
  .debug_pubnames
                   0x0007d1         0x1f build/default/production/adc.o
+ .debug_pubnames
+                  0x0007f0         0xeb build/default/production/eeprom.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000        0x128
+.debug_aranges    0x000000        0x140
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/debug.o
@@ -568,7 +595,9 @@ __FDS
  .debug_aranges
                   0x0000f0         0x18 build/default/production/adc.o
  .debug_aranges
-                  0x000108         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+                  0x000108         0x18 build/default/production/eeprom.o
+ .debug_aranges
+                  0x000120         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -978,63 +1007,69 @@ OUTPUT(dist/default/production/radio_trans.X.production.elf elf32-pic30)
 LOAD default_isr
 LOAD data_init
 
-__c30_signature
-                  0x000128         0x60
- __c30_signature
-                  0x000128          0x6 build/default/production/debug.o
- __c30_signature
-                  0x00012e          0x6 build/default/production/led.o
- __c30_signature
-                  0x000134          0x6 build/default/production/radio.o
- __c30_signature
-                  0x00013a          0x6 build/default/production/radio_comm.o
- __c30_signature
-                  0x000140          0x6 build/default/production/radio_hal.o
- __c30_signature
-                  0x000146          0x6 build/default/production/si4455_api_lib.o
- __c30_signature
-                  0x00014c          0x6 build/default/production/spi.o
- __c30_signature
-                  0x000152          0x6 build/default/production/uart.o
- __c30_signature
-                  0x000158          0x6 build/default/production/main.o
- __c30_signature
-                  0x00015e          0x6 build/default/production/clock.o
- __c30_signature
-                  0x000164          0x6 build/default/production/adc.o
- __c30_signature
-                  0x00016a          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
- __c30_signature
-                  0x000170          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
- __c30_signature
-                  0x000176          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
- __c30_signature
-                  0x00017c          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
- __c30_signature
-                  0x000182          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
-
 .debug_pubtypes
-                  0x000188        0x90a
+                  0x000140        0xa16
  .debug_pubtypes
-                  0x000188         0x5b build/default/production/led.o
+                  0x000140         0x1e build/default/production/debug.o
  .debug_pubtypes
-                  0x0001e3        0x2f8 build/default/production/radio.o
+                  0x00015e         0x5b build/default/production/led.o
  .debug_pubtypes
-                  0x0004db         0x12 build/default/production/radio_comm.o
+                  0x0001b9        0x311 build/default/production/radio.o
  .debug_pubtypes
-                  0x0004ed         0x78 build/default/production/radio_hal.o
+                  0x0004ca         0x2b build/default/production/radio_comm.o
  .debug_pubtypes
-                  0x000565        0x2b2 build/default/production/si4455_api_lib.o
+                  0x0004f5         0x84 build/default/production/radio_hal.o
  .debug_pubtypes
-                  0x000817         0xfe build/default/production/spi.o
+                  0x000579        0x2d8 build/default/production/si4455_api_lib.o
  .debug_pubtypes
-                  0x000915         0xf2 build/default/production/uart.o
+                  0x000851        0x10a build/default/production/spi.o
  .debug_pubtypes
-                  0x000a07         0x2c build/default/production/main.o
+                  0x00095b         0xfe build/default/production/uart.o
  .debug_pubtypes
-                  0x000a33         0x40 build/default/production/clock.o
+                  0x000a59         0x45 build/default/production/main.o
  .debug_pubtypes
-                  0x000a73         0x1f build/default/production/adc.o
+                  0x000a9e         0x40 build/default/production/clock.o
+ .debug_pubtypes
+                  0x000ade         0x1f build/default/production/adc.o
+ .debug_pubtypes
+                  0x000afd         0x59 build/default/production/eeprom.o
+
+__c30_signature
+                  0x000b56         0x66
+ __c30_signature
+                  0x000b56          0x6 build/default/production/debug.o
+ __c30_signature
+                  0x000b5c          0x6 build/default/production/led.o
+ __c30_signature
+                  0x000b62          0x6 build/default/production/radio.o
+ __c30_signature
+                  0x000b68          0x6 build/default/production/radio_comm.o
+ __c30_signature
+                  0x000b6e          0x6 build/default/production/radio_hal.o
+ __c30_signature
+                  0x000b74          0x6 build/default/production/si4455_api_lib.o
+ __c30_signature
+                  0x000b7a          0x6 build/default/production/spi.o
+ __c30_signature
+                  0x000b80          0x6 build/default/production/uart.o
+ __c30_signature
+                  0x000b86          0x6 build/default/production/main.o
+ __c30_signature
+                  0x000b8c          0x6 build/default/production/clock.o
+ __c30_signature
+                  0x000b92          0x6 build/default/production/adc.o
+ __c30_signature
+                  0x000b98          0x6 build/default/production/eeprom.o
+ __c30_signature
+                  0x000b9e          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
+ __c30_signature
+                  0x000ba4          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
+ __c30_signature
+                  0x000baa          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
+ __c30_signature
+                  0x000bb0          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
+ __c30_signature
+                  0x000bb6          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
 .nbss               0x0800         0xa6
  .nbss              0x0800         0x44 build/default/production/uart.o
@@ -1071,97 +1106,107 @@ __c30_signature
 .config_IESO      0xf80006          0x2
  .config_IESO     0xf80006          0x2 build/default/production/main.o
 
-.const              0x8404        0x4c6 load address 0x000404  
+.const              0x8404        0x4d8 load address 0x000404  
  .const             0x8404        0x39a build/default/production/radio.o
                     0x8404                  _radio_configuration_data_array
                     0x8756                  _radio_configuration
  .const             0x879e         0xe8 build/default/production/debug.o
- .const             0x8886         0x44 build/default/production/main.o
+ .const             0x8886         0x56 build/default/production/main.o
 
-.text             0x0008ca        0xd40
- .text            0x0008ca        0x5fc build/default/production/si4455_api_lib.o
-                  0x0008ca                  _si4455_reset
-                  0x0008f2                  _si4455_power_up
-                  0x000940                  _si4455_configuration_init
-                  0x0009f4                  _si4455_write_ezconfig_array
-                  0x000a08                  _si4455_ezconfig_check
-                  0x000a2c                  _si4455_start_tx
-                  0x000a5c                  _si4455_start_rx
-                  0x000aa4                  _si4455_get_int_status
-                  0x000af0                  _si4455_gpio_pin_cfg
-                  0x000b58                  _si4455_change_state
-                  0x000b70                  _si4455_nop
-                  0x000b7e                  _si4455_fifo_info
-                  0x000ba2                  _si4455_part_info
-                  0x000be6                  _si4455_write_tx_fifo
-                  0x000bfa                  _si4455_read_rx_fifo
-                  0x000c0e                  _si4455_get_property
-                  0x000c7c                  _si4455_func_info
-                  0x000cea                  _si4455_frr_a_read
-                  0x000d0c                  _si4455_frr_b_read
-                  0x000d2e                  _si4455_frr_c_read
-                  0x000d50                  _si4455_frr_d_read
-                  0x000d72                  _si4455_device_state
-                  0x000d8e                  _si4455_read_cmd_buff
-                  0x000de2                  _si4455_get_adc_reading
-                  0x000e38                  _si4455_get_ph_status
-                  0x000e5c                  _si4455_get_modem_status
-                  0x000e9e                  _si4455_get_chip_status
- .text            0x000ec6        0x1f6 build/default/production/debug.o
-                  0x000ec6                  _char_to_hex
-                  0x000f06                  _show_si4455_properties
-                  0x001032                  _show_si4455_fifo
-                  0x001078                  _show_si4455_state
- .text            0x0010bc        0x184 build/default/production/radio.o
-                  0x0010bc                  _radio_power_up
-                  0x0010d4                  _radio_init
-                  0x00110a                  _radio_start_rx
-                  0x00112c                  _radio_start_tx
-                  0x001158                  _radio_start_tx_variable_packet
-                  0x001182                  _radio_check_received
-                  0x0011c0                  _radio_check_transmitted
-                  0x0011ea                  _radio_check_received_variable_packet
- .text            0x001240        0x100 build/default/production/radio_comm.o
-                  0x001240                  _radio_comm_get_resp
-                  0x001296                  _radio_comm_send_cmd
-                  0x0012b6                  _radio_comm_read_data
-                  0x0012e4                  _radio_comm_write_data
-                  0x001312                  _radio_comm_poll_cts
-                  0x00131e                  _radio_comm_send_cmd_get_resp
-                  0x001338                  _radio_comm_clear_cts
- .text            0x001340         0xac build/default/production/spi.o
-                  0x001340                  _spi_init
-                  0x001378                  _spi_transfer
-                  0x001396                  _spi_send_array
-                  0x0013be                  _spi_recv_array
- .text            0x0013ec         0xac build/default/production/main.o
-                  0x0013ec                  _main
-                  0x001422                  _uart_handler
-                  0x00145e                  _radio_handler
- .text            0x001498         0xa6 build/default/production/uart.o
-                  0x001498                  _uart_init
-                  0x0014de                  _uart_send_char
-                  0x001502                  _uart_send_array
- .text            0x00153e         0x62 build/default/production/radio_hal.o
-                  0x00153e                  _radio_hal_assert_shut_down
-                  0x001546                  _radio_hal_deassert_shut_down
-                  0x00154e                  _radio_hal_clear_nsel
-                  0x001556                  _radio_hal_set_nsel
-                  0x00155e                  _radio_hal_nirq_level
-                  0x00156a                  _radio_hal_spi_write_byte
-                  0x001576                  _radio_hal_spi_read_byte
-                  0x001580                  _radio_hal_spi_write_data
-                  0x001590                  _radio_hal_spi_read_data
- .text            0x0015a0         0x3a build/default/production/clock.o
-                  0x0015a0                  _clock_init
-                  0x0015ae                  _delay_ms
- .text            0x0015da         0x30 build/default/production/led.o
-                  0x0015da                  _led_init
-                  0x0015e4                  _led_shine
+.text             0x0008dc        0xfa4
+ .text            0x0008dc        0x5fc build/default/production/si4455_api_lib.o
+                  0x0008dc                  _si4455_reset
+                  0x000904                  _si4455_power_up
+                  0x000952                  _si4455_configuration_init
+                  0x000a06                  _si4455_write_ezconfig_array
+                  0x000a1a                  _si4455_ezconfig_check
+                  0x000a3e                  _si4455_start_tx
+                  0x000a6e                  _si4455_start_rx
+                  0x000ab6                  _si4455_get_int_status
+                  0x000b02                  _si4455_gpio_pin_cfg
+                  0x000b6a                  _si4455_change_state
+                  0x000b82                  _si4455_nop
+                  0x000b90                  _si4455_fifo_info
+                  0x000bb4                  _si4455_part_info
+                  0x000bf8                  _si4455_write_tx_fifo
+                  0x000c0c                  _si4455_read_rx_fifo
+                  0x000c20                  _si4455_get_property
+                  0x000c8e                  _si4455_func_info
+                  0x000cfc                  _si4455_frr_a_read
+                  0x000d1e                  _si4455_frr_b_read
+                  0x000d40                  _si4455_frr_c_read
+                  0x000d62                  _si4455_frr_d_read
+                  0x000d84                  _si4455_device_state
+                  0x000da0                  _si4455_read_cmd_buff
+                  0x000df4                  _si4455_get_adc_reading
+                  0x000e4a                  _si4455_get_ph_status
+                  0x000e6e                  _si4455_get_modem_status
+                  0x000eb0                  _si4455_get_chip_status
+ .text            0x000ed8        0x224 build/default/production/eeprom.o
+                  0x000efa                  _eeprom_write_word
+                  0x000f20                  _eeprom_read_word
+                  0x000f3c                  _eeprom_write_byte
+                  0x000fa6                  _eeprom_read_byte
+                  0x000ff4                  _eeprom_write_word_array
+                  0x00102e                  _eeprom_read_word_array
+                  0x00106a                  _eeprom_write_byte_array
+                  0x00109e                  _eeprom_read_byte_array
+                  0x0010d4                  _eeprom_erase_all
+ .text            0x0010fc        0x1f6 build/default/production/debug.o
+                  0x0010fc                  _char_to_hex
+                  0x00113c                  _show_si4455_properties
+                  0x001268                  _show_si4455_fifo
+                  0x0012ae                  _show_si4455_state
+ .text            0x0012f2        0x184 build/default/production/radio.o
+                  0x0012f2                  _radio_power_up
+                  0x00130a                  _radio_init
+                  0x001340                  _radio_start_rx
+                  0x001362                  _radio_start_tx
+                  0x00138e                  _radio_start_tx_variable_packet
+                  0x0013b8                  _radio_check_received
+                  0x0013f6                  _radio_check_transmitted
+                  0x001420                  _radio_check_received_variable_packet
+ .text            0x001476        0x100 build/default/production/radio_comm.o
+                  0x001476                  _radio_comm_get_resp
+                  0x0014cc                  _radio_comm_send_cmd
+                  0x0014ec                  _radio_comm_read_data
+                  0x00151a                  _radio_comm_write_data
+                  0x001548                  _radio_comm_poll_cts
+                  0x001554                  _radio_comm_send_cmd_get_resp
+                  0x00156e                  _radio_comm_clear_cts
+ .text            0x001576         0xec build/default/production/main.o
+                  0x001576                  _main
+                  0x0015ec                  _uart_handler
+                  0x001628                  _radio_handler
+ .text            0x001662         0xac build/default/production/spi.o
+                  0x001662                  _spi_init
+                  0x00169a                  _spi_transfer
+                  0x0016b8                  _spi_send_array
+                  0x0016e0                  _spi_recv_array
+ .text            0x00170e         0xa6 build/default/production/uart.o
+                  0x00170e                  _uart_init
+                  0x001754                  _uart_send_char
+                  0x001778                  _uart_send_array
+ .text            0x0017b4         0x62 build/default/production/radio_hal.o
+                  0x0017b4                  _radio_hal_assert_shut_down
+                  0x0017bc                  _radio_hal_deassert_shut_down
+                  0x0017c4                  _radio_hal_clear_nsel
+                  0x0017cc                  _radio_hal_set_nsel
+                  0x0017d4                  _radio_hal_nirq_level
+                  0x0017e0                  _radio_hal_spi_write_byte
+                  0x0017ec                  _radio_hal_spi_read_byte
+                  0x0017f6                  _radio_hal_spi_write_data
+                  0x001806                  _radio_hal_spi_read_data
+ .text            0x001816         0x3a build/default/production/clock.o
+                  0x001816                  _clock_init
+                  0x001824                  _delay_ms
+ .text            0x001850         0x30 build/default/production/led.o
+                  0x001850                  _led_init
+                  0x00185a                  _led_shine
 
-.dinit            0x00160a         0x2e
- .dinit           0x00160a         0x2e data_init
+.dinit            0x001880         0x2e
+ .dinit           0x001880         0x2e data_init
 
-.text             0x001638          0xa
- .text            0x001638          0xa build/default/production/adc.o
-                  0x001638                  _adc_init
+.text             0x0018ae          0xa
+ .text            0x0018ae          0xa build/default/production/adc.o
+                  0x0018ae                  _adc_init

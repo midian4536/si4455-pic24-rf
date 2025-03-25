@@ -18,22 +18,22 @@ void radio_hal_set_nsel(void) {
     nSel = 1;
 }
 
-unsigned char radio_hal_nirq_level(void) {
+uint8_t radio_hal_nirq_level(void) {
     return nIRQ;
 }
 
-void radio_hal_spi_write_byte(unsigned char byte) {
+void radio_hal_spi_write_byte(uint8_t byte) {
     spi_transfer(byte);
 }
 
-unsigned char radio_hal_spi_read_byte(void) {
+uint8_t radio_hal_spi_read_byte(void) {
     return spi_transfer(0xff);
 }
 
-void radio_hal_spi_write_data(unsigned char byte_count, unsigned char *pdata) {
+void radio_hal_spi_write_data(uint8_t byte_count, uint8_t *pdata) {
     spi_send_array(pdata, byte_count);
 }
 
-void radio_hal_spi_read_data(unsigned char byte_count, unsigned char *pdata) {
+void radio_hal_spi_read_data(uint8_t byte_count, uint8_t *pdata) {
     spi_recv_array(pdata, byte_count);
 }

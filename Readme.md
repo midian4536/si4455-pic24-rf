@@ -45,6 +45,7 @@ This demo establishes a radio communication link between a **transmit board** an
 - **Others**
   - `adc.h` & `adc.c` - ADC initialization.
   - `clock.h` & `clock.c` - Clock initialization and time delay.
+  - `eeprom.h` & `eeprom.c` - EEPROM related functions.
 
 ## Packet Structure
 
@@ -82,6 +83,9 @@ Modify the **include path** and the **definition of `RADIO_CONFIGURATION_DATA`**
 - If the issue persists, verify that `radio_config.h` includes all necessary parameters and that no additional modifications are required after the WDS export.
 
 ## Update History
+
+- **2025-03-25**
+  - Added eeprom functions.
 
 - **2025-03-17**
   - Fixed structure of variable-length packets.

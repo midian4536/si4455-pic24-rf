@@ -3,196 +3,196 @@
 
 /* This section contains command map declarations */
 struct si4455_reply_GENERIC_map {
-    unsigned char  REPLY1;
-    unsigned char  REPLY2;
-    unsigned char  REPLY3;
-    unsigned char  REPLY4;
-    unsigned char  REPLY5;
-    unsigned char  REPLY6;
-    unsigned char  REPLY7;
-    unsigned char  REPLY8;
-    unsigned char  REPLY9;
-    unsigned char  REPLY10;
-    unsigned char  REPLY11;
-    unsigned char  REPLY12;
-    unsigned char  REPLY13;
-    unsigned char  REPLY14;
-    unsigned char  REPLY15;
-    unsigned char  REPLY16;
+    uint8_t  REPLY1;
+    uint8_t  REPLY2;
+    uint8_t  REPLY3;
+    uint8_t  REPLY4;
+    uint8_t  REPLY5;
+    uint8_t  REPLY6;
+    uint8_t  REPLY7;
+    uint8_t  REPLY8;
+    uint8_t  REPLY9;
+    uint8_t  REPLY10;
+    uint8_t  REPLY11;
+    uint8_t  REPLY12;
+    uint8_t  REPLY13;
+    uint8_t  REPLY14;
+    uint8_t  REPLY15;
+    uint8_t  REPLY16;
 };
 
 struct si4455_reply_PART_INFO_map {
-    unsigned char  CHIPREV;
-    unsigned short PART;
-    unsigned char  PBUILD;
-    unsigned short ID;
-    unsigned char  CUSTOMER;
-    unsigned char  ROMID;
-    unsigned char  BOND;
+    uint8_t  CHIPREV;
+    uint16_t PART;
+    uint8_t  PBUILD;
+    uint16_t ID;
+    uint8_t  CUSTOMER;
+    uint8_t  ROMID;
+    uint8_t  BOND;
 };
 
 struct si4455_reply_TEST_DATA_map {
-    unsigned char  TEST0;
-    unsigned char  TEST1;
-    unsigned char  TEST2;
-    unsigned char  TEST3;
-    unsigned char  TEST4;
-    unsigned char  TEST5;
-    unsigned char  TEST6;
-    unsigned char  TEST7;
-    unsigned char  TEST8;
-    unsigned char  TEST9;
-    unsigned char  TESTA;
-    unsigned char  TESTB;
-    unsigned char  TESTC;
-    unsigned char  TESTD;
-    unsigned char  TESTE;
-    unsigned char  TESTF;
+    uint8_t  TEST0;
+    uint8_t  TEST1;
+    uint8_t  TEST2;
+    uint8_t  TEST3;
+    uint8_t  TEST4;
+    uint8_t  TEST5;
+    uint8_t  TEST6;
+    uint8_t  TEST7;
+    uint8_t  TEST8;
+    uint8_t  TEST9;
+    uint8_t  TESTA;
+    uint8_t  TESTB;
+    uint8_t  TESTC;
+    uint8_t  TESTD;
+    uint8_t  TESTE;
+    uint8_t  TESTF;
 };
 
 struct si4455_reply_FUNC_INFO_map {
-    unsigned char  REVEXT;
-    unsigned char  REVBRANCH;
-    unsigned char  REVINT;
-    unsigned short PATCH;
-    unsigned char  FUNC;
-    unsigned char  SVNFLAGS;
-    unsigned long  SVNREV;
+    uint8_t  REVEXT;
+    uint8_t  REVBRANCH;
+    uint8_t  REVINT;
+    uint16_t PATCH;
+    uint8_t  FUNC;
+    uint8_t  SVNFLAGS;
+    uint32_t  SVNREV;
 };
 
 struct si4455_reply_GET_PROPERTY_map {
-    unsigned char  DATA0;
-    unsigned char  DATA1;
-    unsigned char  DATA2;
-    unsigned char  DATA3;
-    unsigned char  DATA4;
-    unsigned char  DATA5;
-    unsigned char  DATA6;
-    unsigned char  DATA7;
-    unsigned char  DATA8;
-    unsigned char  DATA9;
-    unsigned char  DATA10;
-    unsigned char  DATA11;
-    unsigned char  DATA12;
-    unsigned char  DATA13;
-    unsigned char  DATA14;
-    unsigned char  DATA15;
+    uint8_t  DATA0;
+    uint8_t  DATA1;
+    uint8_t  DATA2;
+    uint8_t  DATA3;
+    uint8_t  DATA4;
+    uint8_t  DATA5;
+    uint8_t  DATA6;
+    uint8_t  DATA7;
+    uint8_t  DATA8;
+    uint8_t  DATA9;
+    uint8_t  DATA10;
+    uint8_t  DATA11;
+    uint8_t  DATA12;
+    uint8_t  DATA13;
+    uint8_t  DATA14;
+    uint8_t  DATA15;
 };
 
 struct si4455_reply_GPIO_PIN_CFG_map {
-    unsigned char  GPIO0;
-    unsigned char  GPIO1;
-    unsigned char  GPIO2;
-    unsigned char  GPIO3;
-    unsigned char  NIRQ;
-    unsigned char  SPI_SDO;
-    unsigned char  GEN_CONFIG;
+    uint8_t  GPIO0;
+    uint8_t  GPIO1;
+    uint8_t  GPIO2;
+    uint8_t  GPIO3;
+    uint8_t  NIRQ;
+    uint8_t  SPI_SDO;
+    uint8_t  GEN_CONFIG;
 };
 
 struct si4455_reply_FIFO_INFO_map {
-    unsigned char  RX_FIFO_COUNT;
-    unsigned char  TX_FIFO_SPACE;
+    uint8_t  RX_FIFO_COUNT;
+    uint8_t  TX_FIFO_SPACE;
 };
 
 struct si4455_reply_EZCONFIG_CHECK_map {
-    unsigned char  RESULT;
+    uint8_t  RESULT;
 };
 
 struct si4455_reply_GET_INT_STATUS_map {
-    unsigned char  INT_PEND;
-    unsigned char  INT_STATUS;
-    unsigned char  PH_PEND;
-    unsigned char  PH_STATUS;
-    unsigned char  MODEM_PEND;
-    unsigned char  MODEM_STATUS;
-    unsigned char  CHIP_PEND;
-    unsigned char  CHIP_STATUS;
+    uint8_t  INT_PEND;
+    uint8_t  INT_STATUS;
+    uint8_t  PH_PEND;
+    uint8_t  PH_STATUS;
+    uint8_t  MODEM_PEND;
+    uint8_t  MODEM_STATUS;
+    uint8_t  CHIP_PEND;
+    uint8_t  CHIP_STATUS;
 };
 
 struct si4455_reply_GET_PH_STATUS_map {
-    unsigned char  PH_PEND;
-    unsigned char  PH_STATUS;
+    uint8_t  PH_PEND;
+    uint8_t  PH_STATUS;
 };
 
 struct si4455_reply_GET_MODEM_STATUS_map {
-    unsigned char  MODEM_PEND;
-    unsigned char  MODEM_STATUS;
-    unsigned char  CURR_RSSI;
-    unsigned char  LATCH_RSSI;
-    unsigned char  ANT1_RSSI;
-    unsigned char  ANT2_RSSI;
-    unsigned short AFC_FREQ_OFFSET;
+    uint8_t  MODEM_PEND;
+    uint8_t  MODEM_STATUS;
+    uint8_t  CURR_RSSI;
+    uint8_t  LATCH_RSSI;
+    uint8_t  ANT1_RSSI;
+    uint8_t  ANT2_RSSI;
+    uint16_t AFC_FREQ_OFFSET;
 };
 
 struct si4455_reply_GET_CHIP_STATUS_map {
-    unsigned char  CHIP_PEND;
-    unsigned char  CHIP_STATUS;
-    unsigned char  CMD_ERR_STATUS;
+    uint8_t  CHIP_PEND;
+    uint8_t  CHIP_STATUS;
+    uint8_t  CMD_ERR_STATUS;
 };
 
 struct si4455_reply_REQUEST_DEVICE_STATE_map {
-    unsigned char  CURR_STATE;
-    unsigned char  CURRENT_CHANNEL;
+    uint8_t  CURR_STATE;
+    uint8_t  CURRENT_CHANNEL;
 };
 
 struct si4455_reply_READ_CMD_BUFF_map {
-    unsigned char  CMD_BUFF0;
-    unsigned char  CMD_BUFF1;
-    unsigned char  CMD_BUFF2;
-    unsigned char  CMD_BUFF3;
-    unsigned char  CMD_BUFF4;
-    unsigned char  CMD_BUFF5;
-    unsigned char  CMD_BUFF6;
-    unsigned char  CMD_BUFF7;
-    unsigned char  CMD_BUFF8;
-    unsigned char  CMD_BUFF9;
-    unsigned char  CMD_BUFF10;
-    unsigned char  CMD_BUFF11;
-    unsigned char  CMD_BUFF12;
-    unsigned char  CMD_BUFF13;
-    unsigned char  CMD_BUFF14;
-    unsigned char  CMD_BUFF15;
+    uint8_t  CMD_BUFF0;
+    uint8_t  CMD_BUFF1;
+    uint8_t  CMD_BUFF2;
+    uint8_t  CMD_BUFF3;
+    uint8_t  CMD_BUFF4;
+    uint8_t  CMD_BUFF5;
+    uint8_t  CMD_BUFF6;
+    uint8_t  CMD_BUFF7;
+    uint8_t  CMD_BUFF8;
+    uint8_t  CMD_BUFF9;
+    uint8_t  CMD_BUFF10;
+    uint8_t  CMD_BUFF11;
+    uint8_t  CMD_BUFF12;
+    uint8_t  CMD_BUFF13;
+    uint8_t  CMD_BUFF14;
+    uint8_t  CMD_BUFF15;
 };
 
 struct si4455_reply_FRR_A_READ_map {
-    unsigned char  FRR_A_VALUE;
-    unsigned char  FRR_B_VALUE;
-    unsigned char  FRR_C_VALUE;
-    unsigned char  FRR_D_VALUE;
+    uint8_t  FRR_A_VALUE;
+    uint8_t  FRR_B_VALUE;
+    uint8_t  FRR_C_VALUE;
+    uint8_t  FRR_D_VALUE;
 };
 
 struct si4455_reply_FRR_B_READ_map {
-    unsigned char  FRR_B_VALUE;
-    unsigned char  FRR_C_VALUE;
-    unsigned char  FRR_D_VALUE;
-    unsigned char  FRR_A_VALUE;
+    uint8_t  FRR_B_VALUE;
+    uint8_t  FRR_C_VALUE;
+    uint8_t  FRR_D_VALUE;
+    uint8_t  FRR_A_VALUE;
 };
 
 struct si4455_reply_FRR_C_READ_map {
-    unsigned char  FRR_C_VALUE;
-    unsigned char  FRR_D_VALUE;
-    unsigned char  FRR_A_VALUE;
-    unsigned char  FRR_B_VALUE;
+    uint8_t  FRR_C_VALUE;
+    uint8_t  FRR_D_VALUE;
+    uint8_t  FRR_A_VALUE;
+    uint8_t  FRR_B_VALUE;
 };
 
 struct si4455_reply_FRR_D_READ_map {
-    unsigned char  FRR_D_VALUE;
-    unsigned char  FRR_A_VALUE;
-    unsigned char  FRR_B_VALUE;
-    unsigned char  FRR_C_VALUE;
+    uint8_t  FRR_D_VALUE;
+    uint8_t  FRR_A_VALUE;
+    uint8_t  FRR_B_VALUE;
+    uint8_t  FRR_C_VALUE;
 };
 
 struct si4455_reply_GET_ADC_READING_map {
-    unsigned short GPIO_ADC;
-    unsigned short BATTERY_ADC;
-    unsigned short TEMP_ADC;
-    unsigned char  TEMP_SLOPE;
-    unsigned char  TEMP_INTERCEPT;
+    uint16_t GPIO_ADC;
+    uint16_t BATTERY_ADC;
+    uint16_t TEMP_ADC;
+    uint8_t  TEMP_SLOPE;
+    uint8_t  TEMP_INTERCEPT;
 };
 
 /* The union that stores the reply written back to the host registers */
 union si4455_cmd_reply_union {
-    unsigned char                                                          RAW[16];
+    uint8_t                                                          RAW[16];
     struct si4455_reply_GENERIC_map                                        GENERIC;
     struct si4455_reply_PART_INFO_map                                      PART_INFO;
     struct si4455_reply_TEST_DATA_map                                      TEST_DATA;

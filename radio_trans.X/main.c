@@ -14,6 +14,8 @@
 #include "clock.h"
 #include "debug.h"
 
+#include "eeprom.h"
+
 #include "radio.h"
 
 void uart_handler();
@@ -26,10 +28,10 @@ int main(void) {
     led_init();
     spi_init();
     uart_init();
-    uart_send_array((unsigned char *) "uart initialized", 16);
+    uart_send_array((uint8_t *) "uart initialized", 16);
 
     radio_init();
-    uart_send_array((unsigned char *) "4455 initialized", 16);
+    uart_send_array((uint8_t *) "4455 initialized", 16);
     led_shine(3, 300);
 
     custom_radio_packet[0] = 16;
@@ -44,7 +46,7 @@ int main(void) {
 
 void uart_handler() {
     if (uart_flag) {
-        uart_send_array((unsigned char *) "uart buf:", 9);
+        uart_send_array((uint8_t *) "uart buf:", 9);
         uart_send_array(uart_buf, buf_index);
 
         custom_radio_packet[0] = buf_index;
@@ -57,12 +59,12 @@ void uart_handler() {
 }
 
 void radio_handler() {
-    static unsigned char is_pkt_sending = 0;
+    static uint8_t is_pkt_sending = 0;
     if (1 == radio_check_transmitted()) {
         is_pkt_sending = 0;
     }
     if (0 == is_pkt_sending) {
-        uart_send_array((unsigned char *) "send: ", 6);
+        uart_send_array((uint8_t *) "send: ", 6);
         uart_send_array(custom_radio_packet + 1, custom_radio_packet[0]);
         radio_start_tx_variable_packet(p_radio_configuration->radio_channel_number, custom_radio_packet, custom_radio_packet[0] + 1);
         is_pkt_sending = 1;

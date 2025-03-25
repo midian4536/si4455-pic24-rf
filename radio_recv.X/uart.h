@@ -10,15 +10,15 @@
 #define END_CHAR ';'
 #define UART_BUF_MAX_LEN 64
 
-extern unsigned char uart_buf[UART_BUF_MAX_LEN];
-extern unsigned char buf_index;
-extern unsigned char recv_char;
-extern unsigned char uart_flag;
+extern uint8_t uart_buf[UART_BUF_MAX_LEN];
+extern uint8_t buf_index;
+extern uint8_t recv_char;
+extern uint8_t uart_flag;
 
 void uart_init(void);
 
-void uart_send_char(unsigned char data);
-void uart_send_array(unsigned char *pdata, unsigned int length);
+void uart_send_char(uint8_t data);
+void uart_send_array(uint8_t *pdata, unsigned int length);
 
 void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void);
 

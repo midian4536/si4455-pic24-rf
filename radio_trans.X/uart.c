@@ -1,10 +1,10 @@
 #include "xc.h"
 #include "uart.h"
 
-unsigned char uart_buf[UART_BUF_MAX_LEN];
-unsigned char buf_index;
-unsigned char recv_char;
-unsigned char uart_flag;
+uint8_t uart_buf[UART_BUF_MAX_LEN];
+uint8_t buf_index;
+uint8_t recv_char;
+uint8_t uart_flag;
 
 void uart_init(void) {
     TRIS_RX = 1;
@@ -30,7 +30,7 @@ void uart_init(void) {
     U1TXREG = 'T';
 }
 
-void uart_send_char(unsigned char data) {
+void uart_send_char(uint8_t data) {
     while (U1STAbits.UTXBF)
         ;
     U1TXREG = data;
@@ -38,7 +38,7 @@ void uart_send_char(unsigned char data) {
         ;
 }
 
-void uart_send_array(unsigned char *pdata, unsigned int length) {
+void uart_send_array(uint8_t *pdata, unsigned int length) {
     for (unsigned int i = 0; i < length; i++) {
         while (U1STAbits.UTXBF)
             ;

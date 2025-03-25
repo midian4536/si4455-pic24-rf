@@ -1,7 +1,9 @@
 #ifndef DEBUG_H
 #define	DEBUG_H
 
-void char_to_hex(unsigned char value, unsigned char *hex1, unsigned char *hex2);
+#include <stdint.h>
+
+void char_to_hex(uint8_t value, uint8_t *hex1, uint8_t *hex2);
 
 void show_si4455_properties();
 void show_si4455_fifo();

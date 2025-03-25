@@ -6,10 +6,10 @@
 #include "si4455_api_lib.h"
 
 union si4455_cmd_reply_union si4455_cmd;
-unsigned char radio_cmd[16];
+uint8_t radio_cmd[16];
 
 void si4455_reset(void) {
-    unsigned char loop_count;
+    uint8_t loop_count;
 
     radio_hal_assert_shut_down();
 
@@ -21,20 +21,20 @@ void si4455_reset(void) {
     radio_comm_clear_cts();
 }
 
-void si4455_power_up(unsigned char boot_options, unsigned char xtal_options, unsigned long xo_freq) {
+void si4455_power_up(uint8_t boot_options, uint8_t xtal_options, uint32_t xo_freq) {
     radio_cmd[0] = SI4455_CMD_ID_POWER_UP;
     radio_cmd[1] = boot_options;
     radio_cmd[2] = xtal_options;
-    radio_cmd[3] = (unsigned char) (xo_freq >> 24);
-    radio_cmd[4] = (unsigned char) (xo_freq >> 16);
-    radio_cmd[5] = (unsigned char) (xo_freq >> 8);
-    radio_cmd[6] = (unsigned char) (xo_freq);
+    radio_cmd[3] = (uint8_t) (xo_freq >> 24);
+    radio_cmd[4] = (uint8_t) (xo_freq >> 16);
+    radio_cmd[5] = (uint8_t) (xo_freq >> 8);
+    radio_cmd[6] = (uint8_t) (xo_freq);
 
     radio_comm_send_cmd(SI4455_CMD_ARG_COUNT_POWER_UP, radio_cmd);
 }
 
-unsigned char si4455_configuration_init(unsigned char *p_set_prop_cmd) {
-    unsigned char col, response, num_bytes;
+uint8_t si4455_configuration_init(uint8_t *p_set_prop_cmd) {
+    uint8_t col, response, num_bytes;
 
     while (*p_set_prop_cmd != 0x00) {
         num_bytes = *p_set_prop_cmd++;
@@ -79,39 +79,39 @@ unsigned char si4455_configuration_init(unsigned char *p_set_prop_cmd) {
     return SI4455_SUCCESS;
 }
 
-void si4455_write_ezconfig_array(unsigned char num_bytes, unsigned char *p_ezconfig_array) {
+void si4455_write_ezconfig_array(uint8_t num_bytes, uint8_t *p_ezconfig_array) {
     radio_comm_write_data(SI4455_CMD_ID_WRITE_TX_FIFO, 1, num_bytes, p_ezconfig_array);
 }
 
-void si4455_ezconfig_check(unsigned short check_sum) {
+void si4455_ezconfig_check(uint16_t check_sum) {
     radio_hal_clear_nsel();
 
     radio_hal_spi_write_byte(SI4455_CMD_ID_EZCONFIG_CHECK);
 
-    radio_hal_spi_write_byte((unsigned short) check_sum >> 8);
-    radio_hal_spi_write_byte((unsigned short) check_sum & 0x00ff);
+    radio_hal_spi_write_byte((uint16_t) check_sum >> 8);
+    radio_hal_spi_write_byte((uint16_t) check_sum & 0x00ff);
 
     radio_hal_set_nsel();
 
     radio_comm_get_resp(1, radio_cmd);
 }
 
-void si4455_start_tx(unsigned char channel, unsigned char condition, unsigned short tx_len) {
+void si4455_start_tx(uint8_t channel, uint8_t condition, uint16_t tx_len) {
     radio_cmd[0] = SI4455_CMD_ID_START_TX;
     radio_cmd[1] = channel;
     radio_cmd[2] = condition;
-    radio_cmd[3] = (unsigned char) (tx_len >> 8);
-    radio_cmd[4] = (unsigned char) (tx_len);
+    radio_cmd[3] = (uint8_t) (tx_len >> 8);
+    radio_cmd[4] = (uint8_t) (tx_len);
 
     radio_comm_send_cmd(SI4455_CMD_ARG_COUNT_START_TX, radio_cmd);
 }
 
-void si4455_start_rx(unsigned char channel, unsigned char condition, unsigned short rx_len, unsigned char next_stage1, unsigned char next_stage2, unsigned char next_stage3) {
+void si4455_start_rx(uint8_t channel, uint8_t condition, uint16_t rx_len, uint8_t next_stage1, uint8_t next_stage2, uint8_t next_stage3) {
     radio_cmd[0] = SI4455_CMD_ID_START_RX;
     radio_cmd[1] = channel;
     radio_cmd[2] = condition;
-    radio_cmd[3] = (unsigned char) (rx_len >> 8);
-    radio_cmd[4] = (unsigned char) (rx_len);
+    radio_cmd[3] = (uint8_t) (rx_len >> 8);
+    radio_cmd[4] = (uint8_t) (rx_len);
     radio_cmd[5] = next_stage1;
     radio_cmd[6] = next_stage2;
     radio_cmd[7] = next_stage3;
@@ -119,7 +119,7 @@ void si4455_start_rx(unsigned char channel, unsigned char condition, unsigned sh
     radio_comm_send_cmd(SI4455_CMD_ARG_COUNT_START_RX, radio_cmd);
 }
 
-void si4455_get_int_status(unsigned char ph_clr_pend, unsigned char modem_clr_pend, unsigned char chip_clr_pend) {
+void si4455_get_int_status(uint8_t ph_clr_pend, uint8_t modem_clr_pend, uint8_t chip_clr_pend) {
     radio_cmd[0] = SI4455_CMD_ID_GET_INT_STATUS;
     radio_cmd[1] = ph_clr_pend;
     radio_cmd[2] = modem_clr_pend;
@@ -137,7 +137,7 @@ void si4455_get_int_status(unsigned char ph_clr_pend, unsigned char modem_clr_pe
     si4455_cmd.GET_INT_STATUS.CHIP_STATUS = radio_cmd[7];
 }
 
-void si4455_gpio_pin_cfg(unsigned char gpio0, unsigned char gpio1, unsigned char gpio2, unsigned char gpio3, unsigned char nirq, unsigned char sdo, unsigned char gen_config) {
+void si4455_gpio_pin_cfg(uint8_t gpio0, uint8_t gpio1, uint8_t gpio2, uint8_t gpio3, uint8_t nirq, uint8_t sdo, uint8_t gen_config) {
     radio_cmd[0] = SI4455_CMD_ID_GPIO_PIN_CFG;
     radio_cmd[1] = gpio0;
     radio_cmd[2] = gpio1;
@@ -158,7 +158,7 @@ void si4455_gpio_pin_cfg(unsigned char gpio0, unsigned char gpio1, unsigned char
     si4455_cmd.GPIO_PIN_CFG.GEN_CONFIG = radio_cmd[6];
 }
 
-void si4455_change_state(unsigned char next_stage1) {
+void si4455_change_state(uint8_t next_stage1) {
     radio_cmd[0] = SI4455_CMD_ID_CHANGE_STATE;
     radio_cmd[1] = next_stage1;
 
@@ -170,7 +170,7 @@ void si4455_nop(void) {
     radio_comm_send_cmd(SI4455_CMD_ARG_COUNT_NOP, radio_cmd);
 }
 
-void si4455_fifo_info(unsigned char fifo) {
+void si4455_fifo_info(uint8_t fifo) {
     radio_cmd[0] = SI4455_CMD_ID_FIFO_INFO;
     radio_cmd[1] = fifo;
 
@@ -186,23 +186,23 @@ void si4455_part_info(void) {
     radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_PART_INFO, radio_cmd, SI4455_CMD_REPLY_COUNT_PART_INFO, radio_cmd);
 
     si4455_cmd.PART_INFO.CHIPREV = radio_cmd[0];
-    si4455_cmd.PART_INFO.PART = ((unsigned short) radio_cmd[1] << 8) | radio_cmd[2];
+    si4455_cmd.PART_INFO.PART = ((uint16_t) radio_cmd[1] << 8) | radio_cmd[2];
     si4455_cmd.PART_INFO.PBUILD = radio_cmd[3];
-    si4455_cmd.PART_INFO.ID = ((unsigned short) radio_cmd[4] << 8) | radio_cmd[5];
+    si4455_cmd.PART_INFO.ID = ((uint16_t) radio_cmd[4] << 8) | radio_cmd[5];
     si4455_cmd.PART_INFO.CUSTOMER = radio_cmd[6];
     si4455_cmd.PART_INFO.ROMID = radio_cmd[7];
     si4455_cmd.PART_INFO.BOND = radio_cmd[8];
 }
 
-void si4455_write_tx_fifo(unsigned char num_bytes, unsigned char *pTxData) {
+void si4455_write_tx_fifo(uint8_t num_bytes, uint8_t *pTxData) {
     radio_comm_write_data(SI4455_CMD_ID_WRITE_TX_FIFO, 0, num_bytes, pTxData);
 }
 
-void si4455_read_rx_fifo(unsigned char num_bytes, unsigned char *pRxData) {
+void si4455_read_rx_fifo(uint8_t num_bytes, uint8_t *pRxData) {
     radio_comm_read_data(SI4455_CMD_ID_READ_RX_FIFO, 0, num_bytes, pRxData);
 }
 
-void si4455_get_property(unsigned char group, unsigned char num_props, unsigned char start_prop) {
+void si4455_get_property(uint8_t group, uint8_t num_props, uint8_t start_prop) {
     radio_cmd[0] = SI4455_CMD_ID_GET_PROPERTY;
     radio_cmd[1] = group;
     radio_cmd[2] = num_props;
@@ -236,13 +236,13 @@ void si4455_func_info(void) {
     si4455_cmd.FUNC_INFO.REVEXT = radio_cmd[0];
     si4455_cmd.FUNC_INFO.REVBRANCH = radio_cmd[1];
     si4455_cmd.FUNC_INFO.REVINT = radio_cmd[2];
-    si4455_cmd.FUNC_INFO.PATCH = ((unsigned short) radio_cmd[3] << 8) | radio_cmd[4];
+    si4455_cmd.FUNC_INFO.PATCH = ((uint16_t) radio_cmd[3] << 8) | radio_cmd[4];
     si4455_cmd.FUNC_INFO.FUNC = radio_cmd[5];
     si4455_cmd.FUNC_INFO.SVNFLAGS = radio_cmd[6];
-    si4455_cmd.FUNC_INFO.SVNREV = ((unsigned long) radio_cmd[7] << 24) | ((unsigned long) radio_cmd[8] << 16) | ((unsigned long) radio_cmd[9] << 8) | radio_cmd[10];
+    si4455_cmd.FUNC_INFO.SVNREV = ((uint32_t) radio_cmd[7] << 24) | ((uint32_t) radio_cmd[8] << 16) | ((uint32_t) radio_cmd[9] << 8) | radio_cmd[10];
 }
 
-void si4455_frr_a_read(unsigned char resp_bytes) {
+void si4455_frr_a_read(uint8_t resp_bytes) {
     radio_comm_read_data(SI4455_CMD_ID_FRR_A_READ, 0, resp_bytes, radio_cmd);
 
     si4455_cmd.FRR_A_READ.FRR_A_VALUE = radio_cmd[0];
@@ -251,7 +251,7 @@ void si4455_frr_a_read(unsigned char resp_bytes) {
     si4455_cmd.FRR_A_READ.FRR_D_VALUE = radio_cmd[3];
 }
 
-void si4455_frr_b_read(unsigned char resp_bytes) {
+void si4455_frr_b_read(uint8_t resp_bytes) {
     radio_comm_read_data(SI4455_CMD_ID_FRR_B_READ, 0, resp_bytes, radio_cmd);
 
     si4455_cmd.FRR_B_READ.FRR_B_VALUE = radio_cmd[0];
@@ -260,7 +260,7 @@ void si4455_frr_b_read(unsigned char resp_bytes) {
     si4455_cmd.FRR_B_READ.FRR_A_VALUE = radio_cmd[3];
 }
 
-void si4455_frr_c_read(unsigned char resp_bytes) {
+void si4455_frr_c_read(uint8_t resp_bytes) {
     radio_comm_read_data(SI4455_CMD_ID_FRR_C_READ, 0, resp_bytes, radio_cmd);
 
     si4455_cmd.FRR_C_READ.FRR_C_VALUE = radio_cmd[0];
@@ -269,7 +269,7 @@ void si4455_frr_c_read(unsigned char resp_bytes) {
     si4455_cmd.FRR_C_READ.FRR_B_VALUE = radio_cmd[3];
 }
 
-void si4455_frr_d_read(unsigned char resp_bytes) {
+void si4455_frr_d_read(uint8_t resp_bytes) {
     radio_comm_read_data(SI4455_CMD_ID_FRR_D_READ, 0, resp_bytes, radio_cmd);
 
     si4455_cmd.FRR_D_READ.FRR_D_VALUE = radio_cmd[0];
@@ -310,21 +310,21 @@ void si4455_read_cmd_buff(void) {
     si4455_cmd.READ_CMD_BUFF.CMD_BUFF15 = radio_cmd[15];
 }
 
-void si4455_get_adc_reading(unsigned char adc_en, unsigned char adc_cfg) {
+void si4455_get_adc_reading(uint8_t adc_en, uint8_t adc_cfg) {
     radio_cmd[0] = SI4455_CMD_ID_GET_ADC_READING;
     radio_cmd[1] = adc_en;
     radio_cmd[2] = adc_cfg;
 
     radio_comm_send_cmd_get_resp(SI4455_CMD_ARG_COUNT_GET_ADC_READING, radio_cmd, SI4455_CMD_REPLY_COUNT_GET_ADC_READING, radio_cmd);
 
-    si4455_cmd.GET_ADC_READING.GPIO_ADC = ((unsigned short) radio_cmd[0] << 8) | radio_cmd[1];
-    si4455_cmd.GET_ADC_READING.BATTERY_ADC = ((unsigned short) radio_cmd[2] << 8) | radio_cmd[3];
-    si4455_cmd.GET_ADC_READING.TEMP_ADC = ((unsigned short) radio_cmd[4] << 8) | radio_cmd[5];
+    si4455_cmd.GET_ADC_READING.GPIO_ADC = ((uint16_t) radio_cmd[0] << 8) | radio_cmd[1];
+    si4455_cmd.GET_ADC_READING.BATTERY_ADC = ((uint16_t) radio_cmd[2] << 8) | radio_cmd[3];
+    si4455_cmd.GET_ADC_READING.TEMP_ADC = ((uint16_t) radio_cmd[4] << 8) | radio_cmd[5];
     si4455_cmd.GET_ADC_READING.TEMP_SLOPE = radio_cmd[6];
     si4455_cmd.GET_ADC_READING.TEMP_INTERCEPT = radio_cmd[7];
 }
 
-void si4455_get_ph_status(unsigned char ph_clr_pend) {
+void si4455_get_ph_status(uint8_t ph_clr_pend) {
     radio_cmd[0] = SI4455_CMD_ID_GET_PH_STATUS;
     radio_cmd[1] = ph_clr_pend;
 
@@ -334,7 +334,7 @@ void si4455_get_ph_status(unsigned char ph_clr_pend) {
     si4455_cmd.GET_PH_STATUS.PH_STATUS = radio_cmd[1];
 }
 
-void si4455_get_modem_status(unsigned char modem_clr_pend) {
+void si4455_get_modem_status(uint8_t modem_clr_pend) {
     radio_cmd[0] = SI4455_CMD_ID_GET_MODEM_STATUS;
     radio_cmd[1] = modem_clr_pend;
 
@@ -346,10 +346,10 @@ void si4455_get_modem_status(unsigned char modem_clr_pend) {
     si4455_cmd.GET_MODEM_STATUS.LATCH_RSSI = radio_cmd[3];
     si4455_cmd.GET_MODEM_STATUS.ANT1_RSSI = radio_cmd[4];
     si4455_cmd.GET_MODEM_STATUS.ANT2_RSSI = radio_cmd[5];
-    si4455_cmd.GET_MODEM_STATUS.AFC_FREQ_OFFSET = ((unsigned short) radio_cmd[6] << 8) | radio_cmd[7];
+    si4455_cmd.GET_MODEM_STATUS.AFC_FREQ_OFFSET = ((uint16_t) radio_cmd[6] << 8) | radio_cmd[7];
 }
 
-void si4455_get_chip_status(unsigned char chip_clr_pend) {
+void si4455_get_chip_status(uint8_t chip_clr_pend) {
     radio_cmd[0] = SI4455_CMD_ID_GET_CHIP_STATUS;
     radio_cmd[1] = chip_clr_pend;
 

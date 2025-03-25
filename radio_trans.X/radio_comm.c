@@ -3,11 +3,11 @@
 #include "radio_hal.h"
 #include "radio_comm.h"
 
-unsigned char cts_went_high = 0;
+uint8_t cts_went_high = 0;
 
-unsigned char radio_comm_get_resp(unsigned char byte_count, unsigned char *pdata) {
-    unsigned char cts_val = 0;
-    unsigned short err_cnt = RADIO_CTS_TIMEOUT;
+uint8_t radio_comm_get_resp(uint8_t byte_count, uint8_t *pdata) {
+    uint8_t cts_val = 0;
+    uint16_t err_cnt = RADIO_CTS_TIMEOUT;
 
     while (err_cnt != 0) {
         radio_hal_clear_nsel();
@@ -38,7 +38,7 @@ unsigned char radio_comm_get_resp(unsigned char byte_count, unsigned char *pdata
     return cts_val;
 }
 
-void radio_comm_send_cmd(unsigned char byte_count, unsigned char *pdata) {
+void radio_comm_send_cmd(uint8_t byte_count, uint8_t *pdata) {
     while (!cts_went_high) {
         radio_comm_poll_cts();
     }
@@ -49,7 +49,7 @@ void radio_comm_send_cmd(unsigned char byte_count, unsigned char *pdata) {
     cts_went_high = 0;
 }
 
-void radio_comm_read_data(unsigned char cmd, unsigned char poll_cts, unsigned char byte_count, unsigned char *pdata) {
+void radio_comm_read_data(uint8_t cmd, uint8_t poll_cts, uint8_t byte_count, uint8_t *pdata) {
     if (poll_cts) {
         while (!cts_went_high) {
             radio_comm_poll_cts();
@@ -63,7 +63,7 @@ void radio_comm_read_data(unsigned char cmd, unsigned char poll_cts, unsigned ch
     cts_went_high = 0;
 }
 
-void radio_comm_write_data(unsigned char cmd, unsigned char poll_cts, unsigned char byte_count, unsigned char *pdata) {
+void radio_comm_write_data(uint8_t cmd, uint8_t poll_cts, uint8_t byte_count, uint8_t *pdata) {
     if (poll_cts) {
         while (!cts_went_high) {
             radio_comm_poll_cts();
@@ -77,11 +77,11 @@ void radio_comm_write_data(unsigned char cmd, unsigned char poll_cts, unsigned c
     cts_went_high = 0;
 }
 
-unsigned char radio_comm_poll_cts(void) {
+uint8_t radio_comm_poll_cts(void) {
     return radio_comm_get_resp(0, 0);
 }
 
-unsigned char radio_comm_send_cmd_get_resp(unsigned char cmd_byte_count, unsigned char *p_cmd_data, unsigned char resp_byte_count, unsigned char *p_resp_data) {
+uint8_t radio_comm_send_cmd_get_resp(uint8_t cmd_byte_count, uint8_t *p_cmd_data, uint8_t resp_byte_count, uint8_t *p_resp_data) {
     radio_comm_send_cmd(cmd_byte_count, p_cmd_data);
     return radio_comm_get_resp(resp_byte_count, p_resp_data);
 }

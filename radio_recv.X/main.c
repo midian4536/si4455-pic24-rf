@@ -26,11 +26,11 @@ int main(void) {
     led_init();
     spi_init();
     uart_init();
-    uart_send_array((unsigned char *) "uart initialized", 16);
+    uart_send_array((uint8_t *) "uart initialized", 16);
 
     radio_init();
     radio_start_rx(p_radio_configuration->radio_channel_number);
-    uart_send_array((unsigned char *) "4455 initialized", 16);
+    uart_send_array((uint8_t *) "4455 initialized", 16);
     led_shine(3, 100);
 
     while (1) {
@@ -42,7 +42,7 @@ int main(void) {
 
 void uart_handler() {
     if (uart_flag) {
-        uart_send_array((unsigned char *) "uart buf:", 9);
+        uart_send_array((uint8_t *) "uart buf:", 9);
         uart_send_array(uart_buf, buf_index);
         memset(uart_buf, 0, buf_index);
         buf_index = 0;
