@@ -14,6 +14,8 @@
 #include "clock.h"
 #include "debug.h"
 
+#include "eeprom.h"
+
 #include "radio.h"
 
 void uart_handler();

@@ -7,8 +7,8 @@ void led_init() {
     LED = 0;
 }
 
-void led_shine(unsigned int num, unsigned int time) {
-    for (unsigned int i = 0; i < num; i++) {
+void led_shine(uint16_t num, uint16_t time) {
+    for (uint16_t i = 0; i < num; i++) {
         LED = 1;
         delay_ms(time);
         LED = 0;
