@@ -139,3 +139,5 @@
 - [EZRadio API Rev C2A](https://www.silabs.com/documents/public/application-notes/EZRadio_REVC2_API.zip)
 - [AN685: Si4455/435x 布局设计指南](https://www.silabs.com/documents/public/application-notes/AN685.pdf)
 - [AN692: Si4455/4355 编程指南及示例代码](https://www.silabs.com/documents/public/application-notes/AN692.pdf)
+- [AN796：WDS一般说明](https://www.silabs.com/documents/public/application-notes/AN796.pdf)
+- [AN797：EZRadio 设备 WDS 用户指南](https://www.silabs.com/documents/public/application-notes/AN797.pdf)
