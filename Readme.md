@@ -19,6 +19,20 @@ This demo establishes a radio communication link between a **transmit board** an
   - **XC16 Compiler** - C compiler for PIC24.
   - **Wireless Development Suite 3** *(Optional)* - radio configuration.
 
+## IO Ports
+
+| PIC24 Pin | Function | Connected Device | Description                     |
+| --------- | -------- | ---------------- | ------------------------------- |
+| RA6       | GPIO     | LED              | Controls an indicator LED       |
+| RB7       | UART TX  | RS232            | Transmit data to serial device  |
+| RB2       | UART RX  | RS232            | Receive data from serial device |
+| RB11      | SPI SCLK | Si4455           | SPI Clock for RF module         |
+| RB13      | SPI SDI  | Si4455           | SPI Data In from RF module      |
+| RB10      | SPI SDO  | Si4455           | SPI Data Out to RF module       |
+| RB15      | SPI nSel | Si4455           | Chip Select for RF module       |
+| RB14      | GPIO     | Si4455           | IRQ pin from RF module          |
+| RA1       | GPIO     | Si4455           | SND pin to RF module            |
+
 ## Project Structure
 
 - `radio_recv.X/` - Contains firmware for the **receive board**, responsible for receiving and processing commands.
