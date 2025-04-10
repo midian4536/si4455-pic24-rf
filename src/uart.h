@@ -18,7 +18,7 @@ extern uint8_t uart_flag;
 void uart_init(void);
 
 void uart_send_char(uint8_t data);
-void uart_send_array(uint8_t *pdata, unsigned int length);
+void uart_send_array(uint8_t *pdata, uint32_t length);
 
 void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void);
 

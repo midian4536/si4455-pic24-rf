@@ -38,8 +38,8 @@ void uart_send_char(uint8_t data) {
         ;
 }
 
-void uart_send_array(uint8_t *pdata, unsigned int length) {
-    for (unsigned int i = 0; i < length; i++) {
+void uart_send_array(uint8_t *pdata, uint32_t length) {
+    for (uint32_t i = 0; i < length; i++) {
         while (U1STAbits.UTXBF)
             ;
         U1TXREG = pdata[i];
