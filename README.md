@@ -49,8 +49,8 @@
 # 配置文件
 
 本项目包含两个主要的无线电配置文件，用于接收和发送无线数据，**修改文件名后使用**。
-- **`radio_config_recv_433MHz_variable_length`**：此文件用于接收端配置，主要设置了接收频率（433 MHz）、数据包的可变长度等参数。
-- **`radio_config_trans_433MHz_variable_length`**：此文件用于发送端配置，设置了发送频率（433 MHz）、数据包的可变长度等相关参数。
+- **`radio_config_recv_433MHz_variable_length`**：用于接收端配置，接收频率 433 MHz、变长数据包。
+- **`radio_config_trans_433MHz_variable_length`**：用于发送端配置，发送频率 433 MHz、变长数据包。
 
 ## 数据包结构
 
@@ -94,5 +94,5 @@
 - [EZRadio API Rev C2A](https://www.silabs.com/documents/public/application-notes/EZRadio_REVC2_API.zip)
 - [AN685: Si4455/435x 布局设计指南](https://www.silabs.com/documents/public/application-notes/AN685.pdf)
 - [AN692: Si4455/4355 编程指南及示例代码](https://www.silabs.com/documents/public/application-notes/AN692.pdf)
-- [AN796: WDS一般说明](https://www.silabs.com/documents/public/application-notes/AN796.pdf)
+- [AN796: WDS 一般说明](https://www.silabs.com/documents/public/application-notes/AN796.pdf)
 - [AN797: EZRadio 设备 WDS 用户指南](https://www.silabs.com/documents/public/application-notes/AN797.pdf)
