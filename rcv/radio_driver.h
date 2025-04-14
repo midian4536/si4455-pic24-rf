@@ -1,7 +1,16 @@
-#ifndef SI4455_API_LIB_H
-#define SI4455_API_LIB_H
+#ifndef RADIO_DRIVER_H
+#define RADIO_DRIVER_H
 
-#define SI4455_USER_CONFIG_XTAL_FREQ 30000000L
+#define TRIS_SDN _TRISA1
+#define SDN _LATA1
+
+#define TRIS_NIRQ _TRISB14
+#define nIRQ _RB14
+
+#define TRIS_nSel _TRISB15
+#define nSel _LATB15
+
+#define SI4455_USER_CONFIG_XTAL_FREQ (30000000L)
 
 extern union si4455_cmd_reply_union si4455_cmd;
 extern uint8_t radio_cmd[16];
@@ -18,8 +27,8 @@ enum
 void si4455_reset(void);
 void si4455_power_up(uint8_t boot_options, uint8_t xtal_options, uint32_t xo_freq);
 
-uint8_t si4455_configuration_init(uint8_t *p_set_prop_cmd);
-void si4455_write_ezconfig_array(uint8_t num_bytes, uint8_t *p_ezconfig_array);
+uint8_t si4455_configuration_init(const uint8_t *pset_prop_cmd);
+void si4455_write_ezconfig_array(const uint8_t *pezconfig_array, uint8_t len);
 void si4455_ezconfig_check(uint16_t check_sum);
 
 void si4455_start_tx(uint8_t channel, uint8_t condition, uint16_t tx_len);
@@ -36,8 +45,8 @@ void si4455_nop(void);
 void si4455_fifo_info(uint8_t fifo);
 void si4455_part_info(void);
 
-void si4455_write_tx_fifo(uint8_t num_bytes, uint8_t *p_tx_data);
-void si4455_read_rx_fifo(uint8_t num_bytes, uint8_t *p_rx_data);
+void si4455_write_tx_fifo(uint8_t *ptx_data, uint8_t len);
+void si4455_read_rx_fifo(uint8_t *prx_data, uint8_t len);
 
 void si4455_get_property(uint8_t group, uint8_t num_props, uint8_t start_prop);
 

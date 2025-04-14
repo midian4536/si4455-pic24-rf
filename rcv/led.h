@@ -1,10 +1,8 @@
 #ifndef LED_H
 #define LED_H
 
-#include <stdint.h>
-
-#define TRIS_LED TRISAbits.TRISA6
-#define LED LATAbits.LATA6
+#define TRIS_LED _TRISA6
+#define LED _LATA6
 
 void led_init();
 
