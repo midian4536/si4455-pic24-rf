@@ -1,4 +1,5 @@
 #include "uart.h"
+#include "delay.h"
 
 volatile uint8_t uart_rx_buf[UART_RX_BUF_LEN];
 volatile uint8_t uart_rx_buf_index = 0;
@@ -21,7 +22,7 @@ void uart_init(void)
     U1MODEbits.STSEL = 0;
 
     U1MODEbits.BRGH = 1;
-    U1BRG = 103;
+    U1BRG = FCY / 4 / UART_BAUD_RATE - 1;
 
     IFS0bits.U1TXIF = 0;
     IFS0bits.U1RXIF = 0;
@@ -35,16 +36,33 @@ void uart_init(void)
     U1STAbits.UTXEN = 1;
 }
 
-void uart_send_byte(uint8_t byte)
+bool uart_send_byte(uint8_t byte)
 {
-    while (U1STAbits.UTXBF)
-        ;
-    U1TXREG = byte;
-    while (!U1STAbits.TRMT)
-        ;
+    uint8_t next_head = (uart_tx_head + 1) % UART_TX_BUF_LEN;
+
+    if (next_head == uart_tx_tail)
+    {
+        return 0;
+    }
+
+    uart_tx_buf[uart_tx_head] = byte;
+    uart_tx_head = next_head;
+
+    if (!uart_tx_busy)
+    {
+        uart_tx_busy = 1;
+        if (uart_tx_tail != uart_tx_head)
+        {
+            U1TXREG = uart_tx_buf[uart_tx_tail];
+            uart_tx_tail = (uart_tx_tail + 1) % UART_TX_BUF_LEN;
+        }
+        IEC0bits.U1TXIE = 1;
+    }
+
+    return 1;
 }
 
-void uart_send_array(uint8_t *pdata, uint8_t len)
+void uart_send_bytes(const uint8_t *pdata, uint8_t len)
 {
     for (uint8_t i = 0; i < len; i++)
     {

@@ -28,8 +28,8 @@ extern volatile bool uart_tx_busy;
 
 void uart_init(void);
 
-void uart_send_byte(uint8_t byte);
-void uart_send_array(uint8_t *pdata, uint8_t len);
+bool uart_send_byte(uint8_t byte);
+void uart_send_bytes(const uint8_t *pdata, uint8_t len);
 
 void __attribute__((interrupt, no_auto_psv)) _U1TXInterrupt(void);
 void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void);

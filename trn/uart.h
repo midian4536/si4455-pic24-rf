@@ -10,6 +10,8 @@
 #define TRIS_TX _TRISB7
 #define TX _LATB7
 
+#define UART_BAUD_RATE (9600)
+
 #define UART_END_CHAR ';'
 #define UART_RX_BUF_LEN (64)
 #define UART_TX_BUF_LEN (64)
@@ -26,8 +28,8 @@ extern volatile bool uart_tx_busy;
 
 void uart_init(void);
 
-void uart_send_byte(uint8_t byte);
-void uart_send_array(uint8_t *pdata, uint8_t len);
+bool uart_send_byte(uint8_t byte);
+void uart_send_bytes(const uint8_t *pdata, uint8_t len);
 
 void __attribute__((interrupt, no_auto_psv)) _U1TXInterrupt(void);
 void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void);

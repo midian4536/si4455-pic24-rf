@@ -1,5 +1,5 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef DELAY_H
+#define DELAY_H
 
 #define SYS_FREQ (8000000UL)
 #define FCY (SYS_FREQ / 2)

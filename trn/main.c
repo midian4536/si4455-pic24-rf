@@ -25,10 +25,10 @@ int main(void)
     led_init();
     spi_init();
     uart_init();
-    uart_send_array((uint8_t *)"uart initialized", 16);
+    uart_send_bytes((uint8_t *)"uart initialized", 16);
 
     radio_init();
-    uart_send_array((uint8_t *)"4455 initialized", 16);
+    uart_send_bytes((uint8_t *)"4455 initialized", 16);
     led_shine(3, 300);
 
     const char test_str[] = "Embedded systems require careful memory use.";
@@ -68,8 +68,8 @@ void radio_handler()
     }
     if (!is_pkt_sending)
     {
-        uart_send_array((uint8_t *)"send: ", 6);
-        uart_send_array(custom_radio_packet + 1, custom_radio_packet[0]);
+        uart_send_bytes((uint8_t *)"send: ", 6);
+        uart_send_bytes(custom_radio_packet + 1, custom_radio_packet[0]);
         radio_start_tx_variable_packet(0, custom_radio_packet, custom_radio_packet[0] + 1);
         is_pkt_sending = 1;
         __delay_ms(1000);
